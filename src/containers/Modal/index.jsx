@@ -1,12 +1,12 @@
 import React from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import UserForm from '../../modals/UserForm';
-import Confirmation from '../../modals/Confirmation';
-import { CREATE, UPDATE, DELETE } from '../../constants/modal';
+import UserForm from '../../components/UserForm';
+import Confirmation from '../../components/Confirmation';
+import { CREATE, UPDATE, CONFIRM } from '../../constants/modal';
 
 const Modal = () => {
   const [open, setOpen] = React.useState(true);
-  const contentType = DELETE;
+  const contentType = CONFIRM;
   const userData = {
     name: 'Igor',
     surname: 'Kolesnikov',
@@ -40,10 +40,11 @@ const Modal = () => {
           )
         }
         {
-          contentType === DELETE
+          contentType === CONFIRM
           && (
             <Confirmation
-              title="Are you sure you want to delete the user?"
+              title="Confirmation"
+              contextText="Are you sure you want to delete the user?"
             />
           )
         }
