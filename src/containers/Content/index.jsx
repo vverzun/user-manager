@@ -5,7 +5,7 @@ import data from '../../data.json';
 import { USERS_PER_PAGE } from '../../constants/pagination';
 import style from './style.module.scss';
 
-const Home = () => {
+const Content = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const changePage = useCallback((e, page) => {
     setCurrentPage(page);
@@ -30,4 +30,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Content;

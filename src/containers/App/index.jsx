@@ -1,8 +1,8 @@
 import React from 'react';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import RootLayout from '../../layout';
 import Header from '../Header';
-import Home from '../Home';
+import Content from '../Content';
+import Modal from '../Modal';
 import './style.module.scss';
 
 const theme = createMuiTheme({
@@ -14,14 +14,9 @@ const theme = createMuiTheme({
 
 const App = () => (
   <ThemeProvider theme={theme}>
-    <RootLayout
-      header={
-        <Header />
-      }
-      content={
-        <Home />
-      }
-    />
+    <Header />
+    <Content />
+    <Modal />
   </ThemeProvider>
 );
 
