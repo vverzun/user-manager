@@ -4,7 +4,7 @@ import Modal from '../containers/Modal';
 
 const RootLayout = ({ header, content }) => (
   <>
-    <div className="container">
+    <div>
       {
         header && <div>{ header }</div>
       }
