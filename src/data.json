@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "name": "Eric",
+    "surname": "Cartman",
+    "desc": "Fat Man who likes to read books and ride a bike"
+  },
+  {
+    "id": 2,
+    "name": "Stanley",
+    "surname": "Marsh",
+    "desc": "\u00abStan\u00bb"
+  },
+  {
+    "id": 3,
+    "name": "Kyle",
+    "surname": "Broflovski",
+    "desc": "Boy"
+  },
+  {
+    "id": 4,
+    "name": "It is me",
+    "surname" :"Mario",
+    "desc": "Hates pipes"
+  },
+  {
+    "id": 5,
+    "name": "Pac",
+    "surname": "Man",
+    "desc": "Waka-waka"
+  },
+  {
+    "id": 6,
+    "name": "Donald",
+    "surname": "Trump",
+    "desc": "President"
+  },
+  {
+    "id": 7,
+    "name": "Courteney",
+    "surname": "Cox",
+    "desc": "Friend"
+  },
+  {
+    "id":8,
+    "name":"Kenny",
+    "surname":"McCormick",
+    "desc":"Good boy!!!"
+  },
+  {
+    "id":9,
+    "name":"EditedName2",
+    "surname":"EditedSurname 2",
+    "desc":"EditedDesc2"
+  },
+  {
+    "id":10,
+    "name":"Edited name",
+    "surname":"Edited surname",
+    "desc":"Edited desc"
+  },
+  {
+    "id":11,
+    "name":"James",
+    "surname":"Bond",
+    "desc":"Agent 007"
+  },
+  {
+    "id":12,
+    "name":"Eric",
+    "surname":"Cartman",
+    "desc":"Fat Man"
+  },
+  {
+    "id":13,
+    "name":"Stanley",
+    "surname":"Marsh",
+    "desc":"\u00abStan\u00bb"
+  },
+  {
+    "id":14,
+    "name":"Kyle",
+    "surname":"Broflovski",
+    "desc":"Boy"
+  },
+  {
+    "id":15,
+    "name":"Butters",
+    "surname":"Stotch",
+    "desc":"margarine"
+  },
+  {
+    "id":16,
+    "name":"Butters",
+    "surname":"Stotch",
+    "desc":"margarine"
+  }
+]

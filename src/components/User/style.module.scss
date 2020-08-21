@@ -1,0 +1,25 @@
+.container {
+  width: 250px;
+  margin-top: 2em;
+  position: relative;
+
+  .menu {
+    position: absolute;
+    right: 0;
+    top: 0;
+  };
+
+  .title {
+    text-align: center;
+    font-weight: bold;
+  };
+};
+
+.popoverItem {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 0.5em;
+  };
+};
