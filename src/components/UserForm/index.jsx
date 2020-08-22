@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   TextField,
@@ -8,17 +9,34 @@ import {
   DialogContentText,
   DialogTitle
 } from '@material-ui/core';
+import { addNewUser } from '../../containers/Manager/actions';
+import { closeModal } from '../../containers/Modal/actions';
 
 const UserForm = ({ title, contextText, user }) => {
-  const { name, surname, desc } = user;
+  const [userEntity, setUserValue] = useState({
+    name: user.name,
+    surname: user.surname,
+    desc: user.desc
+  });
+
+  const dispatch = useDispatch();
+
+  const handleChange = useCallback(event => {
+    event.persist();
+    setUserValue(prevUserEntity => ({
+      ...prevUserEntity,
+      [event.target.id]: event.target.value
+    }));
+  }, [userEntity]);
 
   const handleCancel = useCallback(() => {
-    console.log('cancel');
+    dispatch(closeModal());
   }, []);
 
   const handleSave = useCallback(() => {
-    console.log('save');
-  }, []);
+    dispatch(closeModal());
+    dispatch(addNewUser(userEntity));
+  }, [userEntity]);
 
   return (
     <>
@@ -32,21 +50,24 @@ const UserForm = ({ title, contextText, user }) => {
           id="name"
           label="Name"
           fullWidth
-          value={name}
+          onChange={handleChange}
+          value={userEntity.name}
         />
         <TextField
           margin="dense"
           id="surname"
           label="Surname"
           fullWidth
-          value={surname}
+          onChange={handleChange}
+          value={userEntity.surname}
         />
         <TextField
           margin="dense"
           id="desc"
           label="Description"
           fullWidth
-          value={desc}
+          onChange={handleChange}
+          value={userEntity.desc}
         />
       </DialogContent>
       <DialogActions>

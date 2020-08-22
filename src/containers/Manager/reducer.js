@@ -1,7 +1,10 @@
 import {
-  LOAD_USERS_PENDING,
-  LOAD_USERS_SUCCESS,
-  LOAD_USERS_ERROR,
+  ASYNC_ACTION_PENDING,
+  ASYNC_ACTION_ERROR,
+  CREATE_USER,
+  READ_USERS,
+  UPDATE_USER,
+  DELETE_USER,
   CHANGE_PAGE
 } from './actionTypes';
 import { USERS_PER_PAGE } from '../../constants/pagination';
@@ -16,13 +19,27 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
   switch (action.type) {
-    case LOAD_USERS_PENDING:
+    case ASYNC_ACTION_PENDING:
       return {
         ...state,
         isLoading: true
       };
 
-    case LOAD_USERS_SUCCESS:
+    case ASYNC_ACTION_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload.error
+      };
+
+    case CREATE_USER:
+      return {
+        ...state,
+        usersOnPage: [...state.usersOnPage, action.payload.user],
+        isLoading: false
+      };
+
+    case READ_USERS:
       return {
         ...state,
         users: action.payload.users,
@@ -33,11 +50,14 @@ export default (state = defaultState, action) => {
         isLoading: false
       };
 
-    case LOAD_USERS_ERROR:
+    case UPDATE_USER:
       return {
-        ...state,
-        isLoading: false,
-        error: action.payload.error
+        ...state
+      };
+
+    case DELETE_USER:
+      return {
+        ...state
       };
 
     case CHANGE_PAGE:

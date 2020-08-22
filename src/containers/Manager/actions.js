@@ -1,31 +1,60 @@
 import {
-  LOAD_USERS_PENDING,
-  LOAD_USERS_SUCCESS,
-  LOAD_USERS_ERROR,
+  ASYNC_ACTION_PENDING,
+  ASYNC_ACTION_ERROR,
+  CREATE_USER,
+  READ_USERS,
+  // UPDATE_USER,
+  // DELETE_USER,
   CHANGE_PAGE
 } from './actionTypes';
-import { getAllUsers } from '../../services/userService';
+import { getAllUsers, postUser } from '../../services/userService';
 
-const loadUsersPending = () => ({
-  type: LOAD_USERS_PENDING
+const asyncActionPending = () => ({
+  type: ASYNC_ACTION_PENDING
 });
 
-const loadUsersSuccess = users => ({
-  type: LOAD_USERS_SUCCESS,
-  payload: {
-    users
-  }
-});
-
-const loadUsersError = error => ({
-  type: LOAD_USERS_ERROR,
+const asyncActionError = error => ({
+  type: ASYNC_ACTION_ERROR,
   payload: {
     error
   }
 });
 
+const createUser = user => ({
+  type: CREATE_USER,
+  payload: {
+    user
+  }
+});
+
+const readUsers = users => ({
+  type: READ_USERS,
+  payload: {
+    users
+  }
+});
+
+// const updateUser = () => async dispatch => {
+
+// };
+
+// const deleteUser = () => async dispatch => {
+
+// };
+
+export const addNewUser = user => async dispatch => {
+  dispatch(asyncActionPending());
+
+  try {
+    const createdUser = await postUser(user);
+    dispatch(createUser(createdUser));
+  } catch (error) {
+    dispatch(asyncActionError(error));
+  }
+};
+
 export const loadUsers = () => async dispatch => {
-  dispatch(loadUsersPending());
+  dispatch(asyncActionPending());
 
   try {
     const start = Date.now();
@@ -38,9 +67,9 @@ export const loadUsers = () => async dispatch => {
       });
     }
 
-    dispatch(loadUsersSuccess(users));
+    dispatch(readUsers(users));
   } catch (error) {
-    dispatch(loadUsersError(error));
+    dispatch(asyncActionError(error));
   }
 };
 

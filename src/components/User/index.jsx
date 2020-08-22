@@ -1,8 +1,10 @@
 import React, { useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { number } from 'prop-types';
 import { Card, CardContent, Typography, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { MoreVert, DeleteForever, Edit } from '@material-ui/icons';
+import { openModal } from '../../containers/Modal/actions';
+import { UPDATE } from '../../constants/modal';
 import style from './style.module.scss';
 
 const User = ({ id }) => {
@@ -17,6 +19,8 @@ const User = ({ id }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
+  const dispatch = useDispatch();
+
   const handleMenuOpen = useCallback(event => setAnchorEl(event.currentTarget), []);
   const handleMenuClose = useCallback(() => setAnchorEl(null), []);
 
@@ -25,7 +29,7 @@ const User = ({ id }) => {
     handleMenuClose();
   }, []);
   const handleUserEdit = useCallback(() => {
-    console.log('edit');
+    dispatch(openModal(UPDATE, { name, surname, desc }));
     handleMenuClose();
   }, []);
 

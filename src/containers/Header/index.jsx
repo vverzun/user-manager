@@ -1,11 +1,16 @@
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { Typography, Button } from '@material-ui/core';
+import { openModal } from '../Modal/actions';
+import { CREATE } from '../../constants/modal';
 import user from '../../assets/images/user.png';
 import style from './style.module.scss';
 
 const Header = () => {
+  const dispatch = useDispatch();
+
   const handleUserAdd = useCallback(() => {
-    console.log('create');
+    dispatch(openModal(CREATE));
   }, []);
 
   return (
