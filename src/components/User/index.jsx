@@ -1,12 +1,19 @@
 import React, { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import { number } from 'prop-types';
 import { Card, CardContent, Typography, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { MoreVert, DeleteForever, Edit } from '@material-ui/icons';
 import style from './style.module.scss';
 
-import data from '../../data.json';
-
 const User = ({ id }) => {
+  const {
+    name,
+    surname,
+    desc
+  } = useSelector(state => state.userManager.usersOnPage.find(userOnPage => (
+    userOnPage.id === id
+  )));
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -21,8 +28,6 @@ const User = ({ id }) => {
     console.log('edit');
     handleMenuClose();
   }, []);
-
-  const user = data.find(item => item.id === id);
 
   return (
     <Card className={style.container}>
@@ -58,10 +63,10 @@ const User = ({ id }) => {
           </MenuItem>
         </Menu>
         <Typography noWrap className={style.title}>
-          {`${user.name} ${user.surname}`}
+          {`${name} ${surname}`}
         </Typography>
         <Typography noWrap>
-          {user.desc}
+          {desc}
         </Typography>
       </CardContent>
     </Card>

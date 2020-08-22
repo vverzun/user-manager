@@ -1,25 +1,25 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import UserForm from '../../components/UserForm';
 import Confirmation from '../../components/Confirmation';
+import { closeModal } from './actions';
 import { CREATE, UPDATE, CONFIRM } from '../../constants/modal';
 
 const Modal = () => {
-  const [open, setOpen] = React.useState(true);
-  const contentType = CONFIRM;
-  const userData = {
-    name: 'Igor',
-    surname: 'Kolesnikov',
-    desc: 'Good guy'
-  };
+  const isOpened = useSelector(state => state.modal.isOpened);
+  const contentType = useSelector(state => state.modal.contentType);
+  const contentData = useSelector(state => state.modal.contentData);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const dispatch = useDispatch();
+
+  const handleClose = useCallback(() => {
+    dispatch(closeModal());
+  }, []);
 
   return (
     <div>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={isOpened} onClose={handleClose} aria-labelledby="form-dialog-title">
         {
           contentType === CREATE
           && (
@@ -35,7 +35,7 @@ const Modal = () => {
             <UserForm
               title="Update User"
               contextText="Edit the inputs below."
-              user={userData}
+              user={contentData}
             />
           )
         }
