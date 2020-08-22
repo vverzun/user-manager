@@ -9,15 +9,12 @@ import {
   DialogContentText,
   DialogTitle
 } from '@material-ui/core';
-import { addNewUser } from '../../containers/Manager/actions';
 import { closeModal } from '../../containers/Modal/actions';
+import { addNewUser, updateExistingUser } from '../../containers/Manager/actions';
 
-const UserForm = ({ title, contextText, user }) => {
-  const [userEntity, setUserValue] = useState({
-    name: user.name,
-    surname: user.surname,
-    desc: user.desc
-  });
+const UserForm = ({ title, contentText, contentData }) => {
+  const { user, id } = contentData;
+  const [userEntity, setUserValue] = useState({ ...user });
 
   const dispatch = useDispatch();
 
@@ -35,7 +32,11 @@ const UserForm = ({ title, contextText, user }) => {
 
   const handleSave = useCallback(() => {
     dispatch(closeModal());
-    dispatch(addNewUser(userEntity));
+    if (id === -1) {
+      dispatch(addNewUser(userEntity));
+    } else {
+      dispatch(updateExistingUser(id, userEntity));
+    }
   }, [userEntity]);
 
   return (
@@ -43,7 +44,7 @@ const UserForm = ({ title, contextText, user }) => {
       <DialogTitle id="form-dialog-title">{ title }</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          { contextText }
+          { contentText }
         </DialogContentText>
         <TextField
           margin="dense"
@@ -84,20 +85,25 @@ const UserForm = ({ title, contextText, user }) => {
 
 UserForm.propTypes = {
   title: PropTypes.string.isRequired,
-  contextText: PropTypes.string.isRequired,
-  user: PropTypes.exact({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    surname: PropTypes.string,
-    desc: PropTypes.string
+  contentText: PropTypes.string.isRequired,
+  contentData: PropTypes.exact({
+    user: PropTypes.exact({
+      name: PropTypes.string,
+      surname: PropTypes.string,
+      desc: PropTypes.string
+    }),
+    id: PropTypes.number
   })
 };
 
 UserForm.defaultProps = {
-  user: {
-    name: '',
-    surname: '',
-    desc: ''
+  contentData: {
+    user: {
+      name: '',
+      surname: '',
+      desc: ''
+    },
+    id: -1
   }
 };
 

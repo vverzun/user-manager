@@ -5,9 +5,10 @@ import {
   READ_USERS,
   // UPDATE_USER,
   DELETE_USER,
-  CHANGE_PAGE
+  CHANGE_PAGE,
+  UPDATE_USER
 } from './actionTypes';
-import { getAllUsers, postUser, removeUser } from '../../services/userService';
+import { getAllUsers, postUser, removeUser, putUser } from '../../services/userService';
 
 const asyncActionPending = () => ({
   type: ASYNC_ACTION_PENDING
@@ -34,9 +35,12 @@ const readUsers = users => ({
   }
 });
 
-// const updateUser = () => async dispatch => {
-
-// };
+const updateUser = user => ({
+  type: UPDATE_USER,
+  payload: {
+    user
+  }
+});
 
 const deleteUser = id => ({
   type: DELETE_USER,
@@ -76,9 +80,16 @@ export const loadUsers = () => async dispatch => {
   }
 };
 
-// export const updateExistingUser = () => async dispatch => {
+export const updateExistingUser = (id, user) => async dispatch => {
+  dispatch(asyncActionPending());
 
-// };
+  try {
+    const updatedUser = await putUser(id, user);
+    dispatch(updateUser(updatedUser));
+  } catch (error) {
+    dispatch(asyncActionError(error));
+  }
+};
 
 export const deleteExistingUser = id => async dispatch => {
   dispatch(asyncActionPending());

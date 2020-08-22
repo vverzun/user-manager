@@ -9,7 +9,7 @@ import { CREATE, UPDATE, CONFIRM } from '../../constants/modal';
 const Modal = () => {
   const isOpened = useSelector(state => state.modal.isOpened);
   const contentType = useSelector(state => state.modal.contentType);
-  const contentData = useSelector(state => state.modal.contentData);
+  const userData = useSelector(state => state.modal.contentData);
 
   const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ const Modal = () => {
           && (
             <UserForm
               title="Create New User"
-              contextText="Fill the inputs below."
+              contentText="Fill the inputs below."
             />
           )
         }
@@ -34,8 +34,8 @@ const Modal = () => {
           && (
             <UserForm
               title="Update User"
-              contextText="Edit the inputs below."
-              user={contentData}
+              contentText="Edit the inputs below."
+              contentData={userData}
             />
           )
         }
@@ -44,7 +44,7 @@ const Modal = () => {
           && (
             <Confirmation
               title="Confirmation"
-              contextText="Are you sure you want to delete the user?"
+              contentText="Are you sure you want to delete the user?"
             />
           )
         }

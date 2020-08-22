@@ -56,7 +56,21 @@ export default (state = defaultState, action) => {
 
     case UPDATE_USER:
       return {
-        ...state
+        ...state,
+        users: state.users.map(user => (
+          user.id === action.payload.user.id
+            ? action.payload.user
+            : user
+        )),
+        usersOnPage: state.users.map(user => (
+          user.id === action.payload.user.id
+            ? action.payload.user
+            : user
+        )).slice(
+          (state.page * USERS_PER_PAGE) - USERS_PER_PAGE,
+          (state.page * USERS_PER_PAGE)
+        ),
+        isLoading: false
       };
 
     case DELETE_USER:
