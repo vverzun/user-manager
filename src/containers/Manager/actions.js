@@ -1,25 +1,12 @@
 import {
-  ASYNC_ACTION_PENDING,
-  ASYNC_ACTION_ERROR,
   CREATE_USER,
   READ_USERS,
-  // UPDATE_USER,
+  UPDATE_USER,
   DELETE_USER,
-  CHANGE_PAGE,
-  UPDATE_USER
+  CHANGE_PAGE
 } from './actionTypes';
-import { getAllUsers, postUser, removeUser, putUser } from '../../services/userService';
-
-const asyncActionPending = () => ({
-  type: ASYNC_ACTION_PENDING
-});
-
-const asyncActionError = error => ({
-  type: ASYNC_ACTION_ERROR,
-  payload: {
-    error
-  }
-});
+import asyncAction from '../../helpers/asyncActionHelper';
+import userService from '../../services/userService';
 
 const createUser = user => ({
   type: CREATE_USER,
@@ -50,56 +37,19 @@ const deleteUser = id => ({
 });
 
 export const addNewUser = user => async dispatch => {
-  dispatch(asyncActionPending());
-
-  try {
-    const createdUser = await postUser(user);
-    dispatch(createUser(createdUser));
-  } catch (error) {
-    dispatch(asyncActionError(error));
-  }
+  asyncAction(dispatch, userService.post, [user], createUser);
 };
 
 export const loadUsers = () => async dispatch => {
-  dispatch(asyncActionPending());
-
-  try {
-    const start = Date.now();
-    const users = await getAllUsers();
-    const end = Date.now();
-
-    if (end - start < 1000) {
-      await new Promise(res => {
-        setTimeout(() => res(), 1000);
-      });
-    }
-
-    dispatch(readUsers(users));
-  } catch (error) {
-    dispatch(asyncActionError(error));
-  }
+  asyncAction(dispatch, userService.get, [], readUsers);
 };
 
 export const updateExistingUser = (id, user) => async dispatch => {
-  dispatch(asyncActionPending());
-
-  try {
-    const updatedUser = await putUser(id, user);
-    dispatch(updateUser(updatedUser));
-  } catch (error) {
-    dispatch(asyncActionError(error));
-  }
+  asyncAction(dispatch, userService.put, [id, user], updateUser);
 };
 
 export const deleteExistingUser = id => async dispatch => {
-  dispatch(asyncActionPending());
-
-  try {
-    await removeUser(id);
-    dispatch(deleteUser(id));
-  } catch (error) {
-    dispatch(asyncActionError(error));
-  }
+  asyncAction(dispatch, userService.delete, [id], deleteUser);
 };
 
 export const changePage = page => ({

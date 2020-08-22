@@ -28,7 +28,7 @@ const throwIfResponseFailed = async res => {
     try {
       parsedException = await res.json();
     } catch (err) {
-      console.log(err);
+      // handleError
     }
     throw parsedException;
   }
