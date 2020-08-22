@@ -35,7 +35,11 @@ export default (state = defaultState, action) => {
     case CREATE_USER:
       return {
         ...state,
-        usersOnPage: [...state.usersOnPage, action.payload.user],
+        users: [...state.users, action.payload.user],
+        usersOnPage: [...state.users, action.payload.user].slice(
+          (state.page * USERS_PER_PAGE) - USERS_PER_PAGE,
+          (state.page * USERS_PER_PAGE)
+        ),
         isLoading: false
       };
 
