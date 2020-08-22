@@ -8,7 +8,7 @@ export const getAllUsers = async () => {
   return response.json();
 };
 
-export const createUser = async request => {
+export const postUser = async request => {
   const response = await callWebApi({
     endpoint: '/api/users',
     type: 'POST',
@@ -17,7 +17,7 @@ export const createUser = async request => {
   return response.json();
 };
 
-export const updateUser = async (id, request) => {
+export const putUser = async (id, request) => {
   const response = await callWebApi({
     endpoint: `/api/user/${id}`,
     type: 'PUT',
@@ -26,7 +26,7 @@ export const updateUser = async (id, request) => {
   return response.json();
 };
 
-export const deleteUser = async id => {
+export const removeUser = async id => {
   const response = await callWebApi({
     endpoint: `/api/user/${id}`,
     type: 'DELETE'

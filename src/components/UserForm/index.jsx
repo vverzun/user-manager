@@ -1,5 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import {
   Button,
   TextField,
@@ -8,45 +9,66 @@ import {
   DialogContentText,
   DialogTitle
 } from '@material-ui/core';
+import { closeModal } from '../../containers/Modal/actions';
+import { addNewUser, updateExistingUser } from '../../containers/Manager/actions';
 
-const UserForm = ({ title, contextText, user }) => {
-  const { name, surname, desc } = user;
+const UserForm = ({ title, contentText, contentData }) => {
+  const { user, id } = contentData;
+  const [userEntity, setUserValue] = useState({ ...user });
+
+  const dispatch = useDispatch();
+
+  const handleChange = useCallback(event => {
+    event.persist();
+    setUserValue(prevUserEntity => ({
+      ...prevUserEntity,
+      [event.target.id]: event.target.value
+    }));
+  }, [userEntity]);
 
   const handleCancel = useCallback(() => {
-    console.log('cancel');
+    dispatch(closeModal());
   }, []);
 
   const handleSave = useCallback(() => {
-    console.log('save');
-  }, []);
+    dispatch(closeModal());
+    if (id === -1) {
+      dispatch(addNewUser(userEntity));
+    } else {
+      dispatch(updateExistingUser(id, userEntity));
+    }
+  }, [userEntity]);
 
   return (
     <>
       <DialogTitle id="form-dialog-title">{ title }</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          { contextText }
+          { contentText }
         </DialogContentText>
         <TextField
           margin="dense"
           id="name"
           label="Name"
           fullWidth
-          value={name}
+          onChange={handleChange}
+          value={userEntity.name}
         />
         <TextField
           margin="dense"
           id="surname"
           label="Surname"
           fullWidth
-          value={surname}
+          onChange={handleChange}
+          value={userEntity.surname}
         />
         <TextField
           margin="dense"
           id="desc"
           label="Description"
           fullWidth
-          value={desc}
+          onChange={handleChange}
+          value={userEntity.desc}
         />
       </DialogContent>
       <DialogActions>
@@ -63,20 +85,25 @@ const UserForm = ({ title, contextText, user }) => {
 
 UserForm.propTypes = {
   title: PropTypes.string.isRequired,
-  contextText: PropTypes.string.isRequired,
-  user: PropTypes.exact({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    surname: PropTypes.string,
-    desc: PropTypes.string
+  contentText: PropTypes.string.isRequired,
+  contentData: PropTypes.exact({
+    user: PropTypes.exact({
+      name: PropTypes.string,
+      surname: PropTypes.string,
+      desc: PropTypes.string
+    }),
+    id: PropTypes.number
   })
 };
 
 UserForm.defaultProps = {
-  user: {
-    name: '',
-    surname: '',
-    desc: ''
+  contentData: {
+    user: {
+      name: '',
+      surname: '',
+      desc: ''
+    },
+    id: -1
   }
 };
 

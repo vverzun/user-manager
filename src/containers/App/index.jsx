@@ -1,8 +1,10 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Header from '../Header';
-import Content from '../Content';
+import Manager from '../Manager';
 import Modal from '../Modal';
+import store from '../../store';
 import './style.module.scss';
 
 const theme = createMuiTheme({
@@ -13,11 +15,13 @@ const theme = createMuiTheme({
 });
 
 const App = () => (
-  <ThemeProvider theme={theme}>
-    <Header />
-    <Content />
-    <Modal />
-  </ThemeProvider>
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <Header />
+      <Manager />
+      <Modal />
+    </ThemeProvider>
+  </Provider>
 );
 
 export default App;

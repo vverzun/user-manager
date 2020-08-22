@@ -1,28 +1,37 @@
 import React, { useState, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { number } from 'prop-types';
 import { Card, CardContent, Typography, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { MoreVert, DeleteForever, Edit } from '@material-ui/icons';
+import { openModal } from '../../containers/Modal/actions';
+import { UPDATE, CONFIRM } from '../../constants/modal';
 import style from './style.module.scss';
 
-import data from '../../data.json';
-
 const User = ({ id }) => {
+  const {
+    name,
+    surname,
+    desc
+  } = useSelector(state => state.userManager.usersOnPage.find(userOnPage => (
+    userOnPage.id === id
+  )));
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
+
+  const dispatch = useDispatch();
 
   const handleMenuOpen = useCallback(event => setAnchorEl(event.currentTarget), []);
   const handleMenuClose = useCallback(() => setAnchorEl(null), []);
 
   const handleUserDelete = useCallback(() => {
-    console.log('delete');
+    dispatch(openModal(CONFIRM, { id }));
     handleMenuClose();
   }, []);
   const handleUserEdit = useCallback(() => {
-    console.log('edit');
+    dispatch(openModal(UPDATE, { id, user: { name, surname, desc } }));
     handleMenuClose();
   }, []);
-
-  const user = data.find(item => item.id === id);
 
   return (
     <Card className={style.container}>
@@ -44,24 +53,24 @@ const User = ({ id }) => {
           open={open}
           onClose={handleMenuClose}
         >
-          <MenuItem onClick={handleUserDelete}>
-            <Typography className={style.popoverItem}>
-              <DeleteForever />
-              Delete
-            </Typography>
-          </MenuItem>
           <MenuItem onClick={handleUserEdit}>
             <Typography className={style.popoverItem}>
               <Edit />
               Edit
             </Typography>
           </MenuItem>
+          <MenuItem onClick={handleUserDelete}>
+            <Typography className={style.popoverItem}>
+              <DeleteForever />
+              Delete
+            </Typography>
+          </MenuItem>
         </Menu>
         <Typography noWrap className={style.title}>
-          {`${user.name} ${user.surname}`}
+          {`${name} ${surname}`}
         </Typography>
         <Typography noWrap>
-          {user.desc}
+          {desc}
         </Typography>
       </CardContent>
     </Card>

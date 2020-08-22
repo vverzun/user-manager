@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Button,
   DialogActions,
@@ -7,14 +8,20 @@ import {
   DialogContentText,
   DialogTitle
 } from '@material-ui/core';
+import { closeModal } from '../../containers/Modal/actions';
+import { deleteExistingUser } from '../../containers/Manager/actions';
 
-const Confirmation = ({ title, contextText }) => {
+const Confirmation = ({ title, contentText }) => {
+  const { id } = useSelector(state => state.modal.contentData);
+  const dispatch = useDispatch();
+
   const handleNegation = useCallback(() => {
-    console.log('no');
+    dispatch(closeModal());
   }, []);
 
   const handleConfirmation = useCallback(() => {
-    console.log('yes');
+    dispatch(closeModal());
+    dispatch(deleteExistingUser(id));
   }, []);
 
   return (
@@ -22,7 +29,7 @@ const Confirmation = ({ title, contextText }) => {
       <DialogTitle id="form-dialog-title">{ title }</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          { contextText }
+          { contentText }
         </DialogContentText>
       </DialogContent>
       <DialogActions>
@@ -39,7 +46,7 @@ const Confirmation = ({ title, contextText }) => {
 
 Confirmation.propTypes = {
   title: PropTypes.string.isRequired,
-  contextText: PropTypes.string.isRequired
+  contentText: PropTypes.string.isRequired
 };
 
 export default Confirmation;
