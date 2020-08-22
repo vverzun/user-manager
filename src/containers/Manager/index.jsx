@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Pagination } from '@material-ui/lab';
+import Pagination from '@material-ui/lab/Pagination';
 import Spinner from '../../components/Spinner';
 import List from '../../components/List';
 import { loadUsers, changePage } from './actions';
@@ -8,8 +8,9 @@ import { USERS_PER_PAGE } from '../../constants/pagination';
 import style from './style.module.scss';
 
 const Manager = () => {
-  const users = useSelector(state => state.userManager.users);
+  const usersTotalAmount = useSelector(state => state.userManager.users.length);
   const isLoading = useSelector(state => state.userManager.isLoading);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,8 +22,8 @@ const Manager = () => {
   }, []);
 
   const pagesQuantity = useMemo(() => (
-    Math.ceil(users.length / USERS_PER_PAGE)
-  ), [users]);
+    Math.ceil(usersTotalAmount / USERS_PER_PAGE)
+  ), [usersTotalAmount]);
 
   return (
     <div className={style.container}>

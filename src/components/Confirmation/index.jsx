@@ -1,18 +1,17 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  Button,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle
-} from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import Button from '@material-ui/core/Button';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { closeModal } from '../../containers/Modal/actions';
 import { deleteExistingUser } from '../../containers/Manager/actions';
 
-const Confirmation = ({ title, contentText }) => {
-  const { id } = useSelector(state => state.modal.contentData);
+const Confirmation = ({ title, contentText, contentData }) => {
+  const { id } = contentData;
+
   const dispatch = useDispatch();
 
   const handleNegation = useCallback(() => {
@@ -46,7 +45,10 @@ const Confirmation = ({ title, contentText }) => {
 
 Confirmation.propTypes = {
   title: PropTypes.string.isRequired,
-  contentText: PropTypes.string.isRequired
+  contentText: PropTypes.string.isRequired,
+  contentData: PropTypes.exact({
+    id: PropTypes.number
+  }).isRequired
 };
 
 export default Confirmation;

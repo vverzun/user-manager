@@ -44,7 +44,8 @@ const Modal = () => {
           && (
             <Confirmation
               title="Confirmation"
-              contentText="Are you sure you want to delete the user?"
+              contentText="Are you sure you want to delete user?"
+              contentData={userData}
             />
           )
         }

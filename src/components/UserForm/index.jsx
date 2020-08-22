@@ -1,14 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import {
-  Button,
-  TextField,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle
-} from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import { closeModal } from '../../containers/Modal/actions';
 import { addNewUser, updateExistingUser } from '../../containers/Manager/actions';
 
@@ -18,7 +16,7 @@ const UserForm = ({ title, contentText, contentData }) => {
 
   const dispatch = useDispatch();
 
-  const handleChange = useCallback(event => {
+  const handleInputChange = useCallback(event => {
     event.persist();
     setUserValue(prevUserEntity => ({
       ...prevUserEntity,
@@ -32,11 +30,11 @@ const UserForm = ({ title, contentText, contentData }) => {
 
   const handleSave = useCallback(() => {
     dispatch(closeModal());
-    if (id === -1) {
-      dispatch(addNewUser(userEntity));
-    } else {
-      dispatch(updateExistingUser(id, userEntity));
-    }
+    dispatch(
+      id === -1
+        ? addNewUser(userEntity)
+        : updateExistingUser(id, userEntity)
+    );
   }, [userEntity]);
 
   return (
@@ -51,7 +49,7 @@ const UserForm = ({ title, contentText, contentData }) => {
           id="name"
           label="Name"
           fullWidth
-          onChange={handleChange}
+          onChange={handleInputChange}
           value={userEntity.name}
         />
         <TextField
@@ -59,7 +57,7 @@ const UserForm = ({ title, contentText, contentData }) => {
           id="surname"
           label="Surname"
           fullWidth
-          onChange={handleChange}
+          onChange={handleInputChange}
           value={userEntity.surname}
         />
         <TextField
@@ -67,7 +65,7 @@ const UserForm = ({ title, contentText, contentData }) => {
           id="desc"
           label="Description"
           fullWidth
-          onChange={handleChange}
+          onChange={handleInputChange}
           value={userEntity.desc}
         />
       </DialogContent>
