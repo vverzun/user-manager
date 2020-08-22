@@ -29,10 +29,10 @@ const updateUser = user => ({
   }
 });
 
-const deleteUser = id => ({
+const deleteUser = users => ({
   type: DELETE_USER,
   payload: {
-    id
+    users
   }
 });
 

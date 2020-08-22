@@ -12,7 +12,7 @@ const User = ({ id }) => {
     name,
     surname,
     desc
-  } = useSelector(state => state.userManager.usersOnPage.find(userOnPage => (
+  } = useSelector(state => state.userManager.users.find(userOnPage => (
     userOnPage.id === id
   )));
 
