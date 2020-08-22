@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { Typography, Button } from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import { openModal } from '../Modal/actions';
 import { CREATE } from '../../constants/modal';
 import user from '../../assets/images/user.png';
@@ -9,7 +10,7 @@ import style from './style.module.scss';
 const Header = () => {
   const dispatch = useDispatch();
 
-  const handleUserAdd = useCallback(() => {
+  const handleModalOpen = useCallback(() => {
     dispatch(openModal(CREATE));
   }, []);
 
@@ -25,7 +26,7 @@ const Header = () => {
       </div>
       <Button
         variant="contained"
-        onClick={handleUserAdd}
+        onClick={handleModalOpen}
       >
         Add new user
       </Button>

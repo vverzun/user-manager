@@ -10,17 +10,24 @@
     align-items: center;
     margin: 2em;
 
-    img {
+    picture {
       width: 100px;
       height: auto;
       border: 4px solid #000000;
       margin-right: 2em;
+
+      @media (max-width: 530px) {
+        width: 60px;
+      };
     };
 
     p {
       font-size: 2.5em;
       font-weight: bold;
-      line-height: 50px;
+
+      @media (max-width: 530px) {
+        font-size: 1.2em;
+      };
     };
   };
 };
