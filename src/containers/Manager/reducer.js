@@ -61,7 +61,13 @@ export default (state = defaultState, action) => {
 
     case DELETE_USER:
       return {
-        ...state
+        ...state,
+        users: [...state.users].filter(user => user.id !== action.payload.id),
+        usersOnPage: [...state.users].filter(user => user.id !== action.payload.id).slice(
+          (state.page * USERS_PER_PAGE) - USERS_PER_PAGE,
+          (state.page * USERS_PER_PAGE)
+        ),
+        isLoading: false
       };
 
     case CHANGE_PAGE:

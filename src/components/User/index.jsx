@@ -4,6 +4,7 @@ import { number } from 'prop-types';
 import { Card, CardContent, Typography, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { MoreVert, DeleteForever, Edit } from '@material-ui/icons';
 import { openModal } from '../../containers/Modal/actions';
+import { deleteExistingUser } from '../../containers/Manager/actions';
 import { UPDATE } from '../../constants/modal';
 import style from './style.module.scss';
 
@@ -25,7 +26,7 @@ const User = ({ id }) => {
   const handleMenuClose = useCallback(() => setAnchorEl(null), []);
 
   const handleUserDelete = useCallback(() => {
-    console.log('delete');
+    dispatch(deleteExistingUser(id));
     handleMenuClose();
   }, []);
   const handleUserEdit = useCallback(() => {
