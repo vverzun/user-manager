@@ -5,11 +5,12 @@ module.exports = {
   entry: './src/index.jsx',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
   },
   resolve: {
     extensions: ['.js','.jsx']
   },
+  mode: 'production',
   devServer: {
     proxy: {
       '/api/*' : 'http://77.120.241.80:8911'

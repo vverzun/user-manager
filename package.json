@@ -1,15 +1,16 @@
 {
-  "name": "user-crud",
+  "name": "user-manager",
   "version": "1.0.0",
   "description": "Simple web application that allows you to manage users using CRUD operations.",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
-    "build": "webpack"
+    "build": "webpack",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vverzun/user-crud.git"
+    "url": "git+https://github.com/vverzun/user-manager.git"
   },
   "keywords": [
     "react",
@@ -19,9 +20,9 @@
   "author": "Vladyslav Verzun",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vverzun/user-crud/issues"
+    "url": "https://github.com/vverzun/user-manager/issues"
   },
-  "homepage": "https://github.com/vverzun/user-crud#readme",
+  "homepage": "https://github.com/vverzun/user-manager",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
@@ -51,6 +52,7 @@
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.0",
     "file-loader": "^6.0.0",
+    "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^4.3.0",
     "node-sass": "^4.14.1",
     "sass-loader": "^9.0.3",
