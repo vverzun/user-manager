@@ -1,9 +1,16 @@
-const getFetchUrl = args => args.endpoint;
+const getFetchUrl = args => {
+  const certificate = 'https://cors-anywhere.herokuapp.com/';
+  const baseURL = process.env.NODE_ENV === 'development'
+    ? ''
+    : `${certificate}http://77.120.241.80:8911`;
+
+  return `${baseURL}${args.endpoint}`;
+};
 
 const getFetchArgs = args => {
   const headers = {
     'Content-Type': 'application/json',
-    Accept: 'application/json'
+    'Accept': 'application/json',
   };
 
   let body;

@@ -71,7 +71,7 @@ yarn-error.log
 .vscode
 
 # production
-dist
+build
 
 # misc
 .DS_Store
