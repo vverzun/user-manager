@@ -9,7 +9,7 @@ import './style.module.scss';
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: 'Publica',
+    fontFamily: 'Sono',
     fontSize: 16
   }
 });

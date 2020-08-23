@@ -1,17 +1,16 @@
 import {
   ASYNC_ACTION_PENDING,
   ASYNC_ACTION_ERROR,
+  HIDE_ERROR,
   CREATE_USER,
   READ_USERS,
   UPDATE_USER,
   DELETE_USER,
   CHANGE_PAGE
 } from './actionTypes';
-import { USERS_PER_PAGE } from '../../constants/pagination';
 
 const defaultState = {
   users: [],
-  usersOnPage: [],
   page: 1,
   isLoading: false,
   error: null
@@ -32,14 +31,16 @@ export default (state = defaultState, action) => {
         error: action.payload.error
       };
 
+    case HIDE_ERROR:
+      return {
+        ...state,
+        error: null
+      };
+
     case CREATE_USER:
       return {
         ...state,
         users: [...state.users, action.payload.user],
-        usersOnPage: [...state.users, action.payload.user].slice(
-          (state.page * USERS_PER_PAGE) - USERS_PER_PAGE,
-          (state.page * USERS_PER_PAGE)
-        ),
         isLoading: false
       };
 
@@ -47,10 +48,6 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         users: action.payload.users,
-        usersOnPage: action.payload.users.slice(
-          (state.page * USERS_PER_PAGE) - USERS_PER_PAGE,
-          (state.page * USERS_PER_PAGE)
-        ),
         isLoading: false
       };
 
@@ -62,35 +59,19 @@ export default (state = defaultState, action) => {
             ? action.payload.user
             : user
         )),
-        usersOnPage: state.users.map(user => (
-          user.id === action.payload.user.id
-            ? action.payload.user
-            : user
-        )).slice(
-          (state.page * USERS_PER_PAGE) - USERS_PER_PAGE,
-          (state.page * USERS_PER_PAGE)
-        ),
         isLoading: false
       };
 
     case DELETE_USER:
       return {
         ...state,
-        users: [...state.users].filter(user => user.id !== action.payload.id),
-        usersOnPage: [...state.users].filter(user => user.id !== action.payload.id).slice(
-          (state.page * USERS_PER_PAGE) - USERS_PER_PAGE,
-          (state.page * USERS_PER_PAGE)
-        ),
+        users: action.payload.users,
         isLoading: false
       };
 
     case CHANGE_PAGE:
       return {
         ...state,
-        usersOnPage: state.users.slice(
-          (action.payload.page * USERS_PER_PAGE) - USERS_PER_PAGE,
-          (action.payload.page * USERS_PER_PAGE)
-        ),
         page: action.payload.page
       };
 
