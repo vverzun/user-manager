@@ -1,6 +1,7 @@
 import {
   ASYNC_ACTION_PENDING,
   ASYNC_ACTION_ERROR,
+  HIDE_ERROR,
   CREATE_USER,
   READ_USERS,
   UPDATE_USER,
@@ -28,6 +29,12 @@ export default (state = defaultState, action) => {
         ...state,
         isLoading: false,
         error: action.payload.error
+      };
+
+    case HIDE_ERROR:
+      return {
+        ...state,
+        error: null
       };
 
     case CREATE_USER:

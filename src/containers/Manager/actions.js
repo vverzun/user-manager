@@ -1,4 +1,5 @@
 import {
+  HIDE_ERROR,
   CREATE_USER,
   READ_USERS,
   UPDATE_USER,
@@ -7,6 +8,10 @@ import {
 } from './actionTypes';
 import asyncAction from '../../helpers/asyncActionHelper';
 import userService from '../../services/userService';
+
+export const hideError = () => ({
+  type: HIDE_ERROR
+});
 
 const createUser = user => ({
   type: CREATE_USER,

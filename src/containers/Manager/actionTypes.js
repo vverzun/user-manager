@@ -1,5 +1,6 @@
 export const ASYNC_ACTION_PENDING = 'ASYNC_ACTION_PENDING';
 export const ASYNC_ACTION_ERROR = 'ASYNC_ACTION_ERROR';
+export const HIDE_ERROR = 'HIDE_ERROR';
 
 export const CREATE_USER = 'CREATE_USER';
 export const READ_USERS = 'READ_USERS';
