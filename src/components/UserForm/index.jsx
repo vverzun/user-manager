@@ -84,14 +84,7 @@ const UserForm = ({ title, contentText, contentData }) => {
 UserForm.propTypes = {
   title: PropTypes.string.isRequired,
   contentText: PropTypes.string.isRequired,
-  contentData: PropTypes.exact({
-    user: PropTypes.exact({
-      name: PropTypes.string,
-      surname: PropTypes.string,
-      desc: PropTypes.string
-    }),
-    id: PropTypes.number
-  })
+  contentData: PropTypes.arrayOf(PropTypes.object)
 };
 
 UserForm.defaultProps = {

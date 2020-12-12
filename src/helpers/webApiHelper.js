@@ -10,7 +10,7 @@ const getFetchUrl = args => {
 const getFetchArgs = args => {
   const headers = {
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
+    Accept: 'application/json'
   };
 
   let body;
