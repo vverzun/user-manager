@@ -2,9 +2,10 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
 import UserForm from '../../components/UserForm';
+import EventForm from '../../components/EventForm/EventForm';
 import Confirmation from '../../components/Confirmation';
 import { closeModal } from './actions';
-import { CREATE, UPDATE, CONFIRM } from '../../constants/modal';
+import { CREATE, UPDATE, CONFIRM, MODAL_TYPES } from '../../constants/modal';
 
 const Modal = () => {
   const isOpened = useSelector(state => state.modal.isOpened);
@@ -19,7 +20,21 @@ const Modal = () => {
 
   return (
     <div>
-      <Dialog open={isOpened} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog
+        open={isOpened}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        {
+          contentType === MODAL_TYPES.CREATE_EVENT
+          && (
+            <EventForm
+              title="Create New Event"
+              contentText="Fill the inputs below."
+            />
+          )
+        }
+
         {
           contentType === CREATE
           && (
