@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 import EventList from '../components/EventList/EventList';
+import Event from '../components/Event/Event';
 
 const Router = () => (
   <BrowserRouter>
@@ -16,7 +17,7 @@ const Router = () => (
         <div>Profile</div>
       </Route>
       <Route exact path="/event/:id">
-        <div>Event</div>
+        <Event />
       </Route>
     </Switch>
   </BrowserRouter>
