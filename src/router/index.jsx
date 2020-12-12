@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import EventList from '../components/EventList/EventList';
 import Event from '../components/Event/Event';
+import UserProfile from '../components/UserProfile/UserProfile';
 
 const Router = () => (
   <BrowserRouter>
@@ -14,7 +15,7 @@ const Router = () => (
         <EventList />
       </Route>
       <Route exact path="/profile">
-        <div>Profile</div>
+        <UserProfile />
       </Route>
       <Route exact path="/event/:id">
         <Event />
