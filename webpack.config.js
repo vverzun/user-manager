@@ -1,19 +1,19 @@
 const path = require('path');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.jsx',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'build')
   },
   resolve: {
-    extensions: ['.js','.jsx']
+    extensions: ['.js', '.jsx']
   },
   mode: 'production',
   devServer: {
     proxy: {
-      '/api/*' : 'http://77.120.241.80:8911'
+      '/api/*': 'http://77.120.241.80:8911'
     }
   },
   module: {
@@ -34,14 +34,14 @@ module.exports = {
       {
         test: /\.(s*)css$/,
         use: [
-          "style-loader", {
-            loader: "css-loader",
+          'style-loader', {
+            loader: 'css-loader',
             options: {
               importLoaders: 1,
               modules: true
             }
           },
-          "sass-loader"
+          'sass-loader'
         ]
       },
       {
@@ -52,7 +52,7 @@ module.exports = {
             options: {
               outputPath: 'images/'
             }
-          },
+          }
         ]
       },
       {
@@ -72,7 +72,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
-      favicon: './public/favicon.ico',
+      favicon: './public/favicon.ico'
     })
   ]
 };

@@ -1,11 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-import Header from '../Header';
-import Manager from '../Manager';
+// import Header from '../Header';
+// import Manager from '../Manager';
 import Modal from '../Modal';
 import store from '../../store';
 import './style.module.scss';
+// import EventList from '../../components/EventList/EventList';
+import UserProfile from '../../components/UserProfile/UserProfile';
 
 const theme = createMuiTheme({
   typography: {
@@ -17,8 +19,8 @@ const theme = createMuiTheme({
 const App = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <Header />
-      <Manager />
+      {/* <Header /> */}
+      <UserProfile />
       <Modal />
     </ThemeProvider>
   </Provider>
