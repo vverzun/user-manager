@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useCallback } from 'react';
 import {
   Box,
   AppBar,
@@ -11,10 +10,17 @@ import {
   MenuItem
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useHistory } from 'react-router-dom';
+
 import styles from './styles.module.scss';
 
 const HomePage = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const history = useHistory();
+  const handleMenuItemClick = useCallback(route => () => {
+    history.push(route);
+  }, []);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -49,9 +55,9 @@ const HomePage = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>Events</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={handleMenuItemClick('profile')}>Profile</MenuItem>
+              <MenuItem onClick={handleMenuItemClick('events')}>Events</MenuItem>
+              <MenuItem>Logout</MenuItem>
             </Menu>
           </IconButton>
 
