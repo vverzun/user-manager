@@ -10,11 +10,9 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  mode: 'production',
+  mode: 'development',
   devServer: {
-    proxy: {
-      '/api/*': 'http://77.120.241.80:8911'
-    }
+    historyApiFallback: true
   },
   module: {
     rules: [
