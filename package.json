@@ -1,7 +1,7 @@
 {
   "name": "user-manager",
   "version": "1.0.0",
-  "description": "Simple web application that allows you to manage users using CRUD operations.",
+  "description": "Simple web application that allows you to manage events.",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
