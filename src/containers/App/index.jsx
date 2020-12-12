@@ -4,10 +4,8 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import Router from '../../router';
 import store from '../../store';
-import './style.module.scss';
 import Modal from '../Modal';
-// import EventList from '../../components/EventList/EventList';
-import UserProfile from '../../components/UserProfile/UserProfile';
+import './style.module.scss';
 
 const theme = createMuiTheme({
   typography: {
