@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import Layout from '../../containers/Layout/Layout';
 
 import style from './style.module.scss';
 import eventList from '../../mockData/eventList';
@@ -38,9 +39,11 @@ const EventList = () => {
   ), [eventList]);
 
   return (
-    <Box className={style.eventsWrapper}>
-      {renderEvents()}
-    </Box>
+    <Layout>
+      <Box className={style.eventsWrapper}>
+        {renderEvents()}
+      </Box>
+    </Layout>
   );
 };
 
