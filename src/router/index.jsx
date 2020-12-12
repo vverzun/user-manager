@@ -12,7 +12,9 @@ import UserProfile from '../components/UserProfile/UserProfile';
 const Router = () => (
   <BrowserRouter>
     <Switch>
-      <Route exact path="/" component={HomePage} />
+      <Route exact path="/">
+        <HomePage />
+      </Route>
       <Route exact path="/events">
         <EventList />
       </Route>
