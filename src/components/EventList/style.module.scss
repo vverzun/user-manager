@@ -1,8 +1,14 @@
 .eventsWrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 25px;
 
   .eventCard {
-    margin: 0 auto 10px;
-    width: 350px;
-    
+    width: 100%;
+
+    &:not(:last-of-type) {
+      margin-bottom: 25px;
+    }
   }
 }
