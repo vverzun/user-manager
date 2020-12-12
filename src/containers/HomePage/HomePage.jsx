@@ -7,10 +7,12 @@ import {
   Button,
   IconButton,
   Menu,
-  MenuItem
+  MenuItem,
+  Fade
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useHistory } from 'react-router-dom';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import styles from './styles.module.scss';
 
@@ -18,7 +20,7 @@ const HomePage = () => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const history = useHistory();
-  const handleMenuItemClick = useCallback(route => () => {
+  const redirect = useCallback(route => () => {
     history.push(route);
   }, []);
 
@@ -55,8 +57,8 @@ const HomePage = () => {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleMenuItemClick('profile')}>Profile</MenuItem>
-              <MenuItem onClick={handleMenuItemClick('events')}>Events</MenuItem>
+              <MenuItem onClick={redirect('profile')}>Profile</MenuItem>
+              <MenuItem onClick={redirect('events')}>Events</MenuItem>
               <MenuItem>Logout</MenuItem>
             </Menu>
           </IconButton>
@@ -70,9 +72,18 @@ const HomePage = () => {
       </AppBar>
 
       <Box className={styles.homeContentWrapper}>
-        <Typography variant="h4" className={styles.mainHeading}>
-          Welcome to Partynder!
+        <Fade in timeout={{ enter: 500 }}>
+          <Typography variant="h4" className={styles.mainHeading}>
+            Welcome to Partynder!
+          </Typography>
+        </Fade>
+      </Box>
+
+      <Box className={styles.browseWrapper} onClick={redirect('events')}>
+        <Typography variant="h6">
+          Browse events near you
         </Typography>
+        <ArrowForwardIcon className={styles.browseIcon} />
       </Box>
     </Box>
   );
