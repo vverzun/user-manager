@@ -1,0 +1,39 @@
+.wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 25px;
+
+  .dateAndTimeWrapper {
+    padding-bottom: 25px;
+  }
+
+  .infoWrapper {
+    text-align: center;
+
+    .image {
+      padding-bottom: 25px;
+    }
+
+    .description {
+      padding-bottom: 25px;
+    }
+
+    .text {
+      padding-bottom: 10px;
+    }
+
+    .participants {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding-bottom: 25px;
+    }
+  }
+
+  .actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+  }
+}
