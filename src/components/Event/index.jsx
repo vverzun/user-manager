@@ -1,5 +1,6 @@
 import React from 'react';
 import { arrayOf, string } from 'prop-types';
+import moment from 'moment';
 import { Avatar, Box, Button, Card, Typography } from '@material-ui/core';
 import avatar from '../../assets/images/avatar.png';
 import party from '../../assets/images/party.jpeg';
@@ -20,7 +21,7 @@ const Event = ({
       <Typography>
         Date:
         {' '}
-        {date}
+        {moment(date).format('MM:HH DD MMM')}
       </Typography>
       <Typography>
         Location:
