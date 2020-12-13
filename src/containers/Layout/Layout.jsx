@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import {
   Box,
   AppBar,
@@ -12,10 +13,12 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
+import Spinner from '../../components/Spinner';
+import ErrorAlert from '../../components/ErrorAlert';
 import styles from './styles.modules.scss';
 
 const Layout = ({ children }) => {
+  const isLoading = useSelector(state => state.isLoading);
   const [anchorEl, setAnchorEl] = useState(null);
 
   const history = useHistory();
@@ -74,8 +77,10 @@ const Layout = ({ children }) => {
           <Button color="inherit" onClick={handleLoginRedirect}>Login</Button>
         </Toolbar>
       </AppBar>
-
-      {children}
+      {isLoading
+        ? <Spinner />
+        : children}
+      <ErrorAlert />
     </Box>
   );
 };
