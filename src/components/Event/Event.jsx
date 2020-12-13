@@ -66,7 +66,7 @@ const Event = () => {
               </Typography>
               <Box className={style.participants}>
                 {participants.map(participant => (
-                  <Avatar key={uuidv4()} src={avatar} alt={participant} />
+                  <Avatar key={uuidv4()} src={avatar} alt={participant.firstName} />
                 ))}
               </Box>
             </Box>

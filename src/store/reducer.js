@@ -69,6 +69,13 @@ export default (state, { type, payload }) => {
         ...state
       };
 
+    case actionTypes.LOGOUT:
+      localStorage.removeItem('jwtToken');
+
+      return {
+        ...state
+      };
+
     case actionTypes.GET_USER_CREATED_EVENTS:
       return {
         ...state,

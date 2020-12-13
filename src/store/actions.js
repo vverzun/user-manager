@@ -80,6 +80,10 @@ const loginUserAction = jwtToken => ({
   }
 });
 
+export const logout = () => ({
+  type: actionTypes.LOGOUT
+});
+
 export const loadAllEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getAllEvents, [], getAllEventsAction);
 };
