@@ -4,19 +4,18 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 
-import { openModal } from '../../containers/Modal/actions';
-import { MODAL_TYPES } from '../../constants/modal';
+import { openModalAction } from '../../store/actions';
 import user from '../../assets/images/user.png';
 import style from './style.module.scss';
 import userData from '../../mockData/userProfile';
 import Layout from '../../containers/Layout/Layout';
 import BackButton from '../common/BackButton/BackButton';
 
-const Header = () => {
+const UserProfile = () => {
   const dispatch = useDispatch();
 
   const handleModalOpen = useCallback(() => {
-    dispatch(openModal(MODAL_TYPES.CREATE_EVENT));
+    dispatch(openModalAction());
   }, []);
 
   const { firstName, lastName, eventsVisited, eventsCreated } = userData;
@@ -63,4 +62,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default UserProfile;

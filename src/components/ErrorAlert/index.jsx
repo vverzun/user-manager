@@ -4,16 +4,16 @@ import Alert from '@material-ui/lab/Alert';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { hideError } from '../../containers/Manager/actions';
+import { closeErrorAction } from '../../store/actions';
 import style from './style.module.scss';
 
 const ErrorAlert = () => {
-  const error = useSelector(state => state.userManager.error);
+  const error = useSelector(state => state.error);
 
   const dispatch = useDispatch();
 
   const handleAlertClose = useCallback(() => {
-    dispatch(hideError());
+    dispatch(closeErrorAction());
   }, []);
 
   return (

@@ -12,8 +12,8 @@ import {
 } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-import { loadEvents } from '../../store/events/actions';
 import Layout from '../../containers/Layout/Layout';
+import { loadAllEvents } from '../../store/actions';
 import style from './style.module.scss';
 import BackButton from '../common/BackButton/BackButton';
 
@@ -26,21 +26,14 @@ const EventList = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const events = useSelector(state => state.events.events);
-  const isLoading = useSelector(state => state.events.isLoading);
-  const error = useSelector(state => state.events.error);
-
-  const eventList = _.get(events, '_embedded.events');
+  const allEvents = useSelector(state => state.allEvents);
+  const isLoading = useSelector(state => state.isLoading);
 
   useEffect(() => {
-    dispatch(loadEvents());
+    dispatch(loadAllEvents());
   }, []);
 
   const renderEvents = useCallback(() => {
-    if (error) {
-      return <Typography>Error while fetching events</Typography>;
-    }
-
     if (isLoading) {
       return (
         <>
@@ -53,11 +46,11 @@ const EventList = () => {
       );
     }
 
-    if (_.isEmpty(eventList)) {
+    if (_.isEmpty(allEvents)) {
       return <Typography>There are no events right now</Typography>;
     }
 
-    return _.map(eventList, ({ title, date, location, id }, index) => (
+    return _.map(allEvents, ({ title, date, location, id }, index) => (
       <Grow in timeout={TRANSITION_TIME * index + TRANSITION_TIME}>
         <Card
           key={id}
@@ -77,7 +70,7 @@ const EventList = () => {
         </Card>
       </Grow>
     ));
-  });
+  }, [allEvents, isLoading]);
 
   return (
     <Layout>

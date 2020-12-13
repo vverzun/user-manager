@@ -16,6 +16,8 @@ const HomePage = () => {
     history.push(route);
   }, []);
 
+  console.log('asdsad');
+
   return (
     <Layout>
       <Box className={styles.homeWrapper}>

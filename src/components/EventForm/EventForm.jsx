@@ -6,12 +6,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 
-import { closeModal } from '../../containers/Modal/actions';
-import { addNewUser, updateExistingUser } from '../../containers/Manager/actions';
+import { closeModalAction } from '../../store/actions';
 
-const EventForm = ({ title, contentText, contentData }) => {
+const EventForm = ({ title, contentData }) => {
   const { user, id } = contentData;
   const [userEntity, setUserValue] = useState({ ...user });
 
@@ -26,17 +24,8 @@ const EventForm = ({ title, contentText, contentData }) => {
   }, [userEntity]);
 
   const handleCancel = useCallback(() => {
-    dispatch(closeModal());
+    dispatch(closeModalAction());
   }, []);
-
-  const handleSave = useCallback(() => {
-    dispatch(closeModal());
-    dispatch(
-      id === -1
-        ? addNewUser(userEntity)
-        : updateExistingUser(id, userEntity)
-    );
-  }, [userEntity]);
 
   return (
     <>
@@ -92,7 +81,7 @@ const EventForm = ({ title, contentText, contentData }) => {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={handleSave}>
+        <Button onClick={() => console.log('save')}>
           Save
         </Button>
         <Button onClick={handleCancel}>
@@ -105,7 +94,6 @@ const EventForm = ({ title, contentText, contentData }) => {
 
 EventForm.propTypes = {
   title: PropTypes.string.isRequired,
-  contentText: PropTypes.string.isRequired,
   contentData: PropTypes.arrayOf(PropTypes.object)
 };
 
