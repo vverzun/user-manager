@@ -42,9 +42,9 @@ const EventForm = ({ title, contentText, contentData }) => {
     <>
       <DialogTitle id="form-dialog-title">{ title }</DialogTitle>
       <DialogContent>
-        <DialogContentText>
+        {/* <DialogContentText>
           { contentText }
-        </DialogContentText>
+        </DialogContentText> */}
         <TextField
           margin="dense"
           id="title"
@@ -62,6 +62,15 @@ const EventForm = ({ title, contentText, contentData }) => {
           value={userEntity.location}
         />
         <TextField
+          type="number"
+          margin="dense"
+          id="duration"
+          label="Duration"
+          fullWidth
+          onChange={handleInputChange}
+          value={userEntity.duration}
+        />
+        <TextField
           id="datetime-local"
           label="Time"
           type="datetime-local"
@@ -71,6 +80,8 @@ const EventForm = ({ title, contentText, contentData }) => {
           }}
         />
         <TextField
+          multiline
+          rowsMax={4}
           margin="dense"
           id="desc"
           label="Description"
@@ -81,11 +92,11 @@ const EventForm = ({ title, contentText, contentData }) => {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={handleCancel}>
-          Cancel
-        </Button>
         <Button onClick={handleSave}>
           Save
+        </Button>
+        <Button onClick={handleCancel}>
+          Cancel
         </Button>
       </DialogActions>
     </>

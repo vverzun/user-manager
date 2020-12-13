@@ -12,6 +12,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 import styles from './styles.modules.scss';
 
 const Layout = ({ children }) => {

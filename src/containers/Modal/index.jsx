@@ -1,11 +1,13 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
+
 import UserForm from '../../components/UserForm';
 import EventForm from '../../components/EventForm/EventForm';
 import Confirmation from '../../components/Confirmation';
 import { closeModal } from './actions';
 import { CREATE, UPDATE, CONFIRM, MODAL_TYPES } from '../../constants/modal';
+import style from './styles.modules.scss';
 
 const Modal = () => {
   const isOpened = useSelector(state => state.modal.isOpened);
@@ -19,33 +21,34 @@ const Modal = () => {
   }, []);
 
   return (
-    <div>
-      <Dialog
-        open={isOpened}
-        onClose={handleClose}
-        aria-labelledby="form-dialog-title"
-      >
-        {
-          contentType === MODAL_TYPES.CREATE_EVENT
+    <Dialog
+      open={isOpened}
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+
+    >
+      {
+        contentType === MODAL_TYPES.CREATE_EVENT
           && (
             <EventForm
               title="Create New Event"
               contentText="Fill the inputs below."
+              className={style.modalWrapper}
             />
           )
-        }
+      }
 
-        {
-          contentType === CREATE
+      {
+        contentType === CREATE
           && (
             <UserForm
               title="Create New User"
               contentText="Fill the inputs below."
             />
           )
-        }
-        {
-          contentType === UPDATE
+      }
+      {
+        contentType === UPDATE
           && (
             <UserForm
               title="Update User"
@@ -53,9 +56,9 @@ const Modal = () => {
               contentData={userData}
             />
           )
-        }
-        {
-          contentType === CONFIRM
+      }
+      {
+        contentType === CONFIRM
           && (
             <Confirmation
               title="Confirmation"
@@ -63,9 +66,8 @@ const Modal = () => {
               contentData={userData}
             />
           )
-        }
-      </Dialog>
-    </div>
+      }
+    </Dialog>
   );
 };
 
