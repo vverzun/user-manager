@@ -21,9 +21,9 @@ const EventList = () => {
     _.map(eventList, ({ title, date, location, id }) => (
       <Card
         key={id}
-        variant="outlined"
         className={style.eventCard}
         onClick={handleViewEventDetails(id)}
+        elevation="3"
       >
         <CardContent>
           <Typography variant="h6">{title}</Typography>
