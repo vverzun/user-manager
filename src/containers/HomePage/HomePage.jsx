@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import Layout from '../Layout/Layout';
 
-import styles from './styles.module.scss';
+import style from './styles.module.scss';
 
 const HomePage = () => {
   const history = useHistory();
@@ -18,21 +18,21 @@ const HomePage = () => {
 
   return (
     <Layout>
-      <Box className={styles.homeWrapper}>
-        <Box className={styles.homeContentWrapper}>
+      <Box className={style.homeWrapper}>
+        <Box className={style.homeContentWrapper}>
           <Fade in timeout={{ enter: 500 }}>
-            <Typography variant="h4" className={styles.mainHeading}>
+            <Typography variant="h4" className={style.mainHeading}>
               Welcome to Partynder!
             </Typography>
           </Fade>
         </Box>
 
         <Fade in timeout={{ enter: 500, appear: 3000 }}>
-          <Box className={styles.browseWrapper} onClick={redirect('/events')}>
+          <Box className={style.browseWrapper} onClick={redirect('/events')}>
             <Typography variant="h6">
               Browse events near you
             </Typography>
-            <ArrowForwardIcon className={styles.browseIcon} />
+            <ArrowForwardIcon className={style.browseIcon} />
           </Box>
         </Fade>
       </Box>

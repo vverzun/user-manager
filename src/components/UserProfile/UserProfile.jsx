@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Button from '@material-ui/core/Button';
+import { Typography, Box, Button, Divider } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import { openModalAction } from '../../store/actions';
 import user from '../../assets/images/user.png';
@@ -13,6 +13,11 @@ import BackButton from '../common/BackButton/BackButton';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
+
+  const history = useHistory();
+  const redirect = useCallback(route => () => {
+    history.push(route);
+  }, []);
 
   const handleModalOpen = useCallback(() => {
     dispatch(openModalAction());
@@ -35,6 +40,7 @@ const UserProfile = () => {
             {lastName}
           </Typography>
         </Box>
+        <Divider />
 
         <Box className={style.infoWrapper}>
           <Typography>
@@ -48,6 +54,14 @@ const UserProfile = () => {
             {eventsCreated}
           </Typography>
         </Box>
+        <Divider />
+
+        <Box className={style.myEventsWrapper} onClick={redirect('/myEvents')}>
+          <Typography variant="h6">
+            Browse events near you
+          </Typography>
+          <ArrowForwardIcon className={style.myEventsIcon} />
+        </Box>
 
         <Box className={style.eventButtonWrapper}>
           <Button
@@ -57,6 +71,7 @@ const UserProfile = () => {
             Add new Event
           </Button>
         </Box>
+
       </Box>
     </Layout>
   );
