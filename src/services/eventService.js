@@ -5,7 +5,7 @@ const eventService = {
     const response = await callWebApi({
       endpoint: '/events',
       type: 'GET'
-    });
+    }, true);
 
     return response.json();
   },
@@ -14,7 +14,7 @@ const eventService = {
     const response = await callWebApi({
       endpoint: `/events/${id}`,
       type: 'GET'
-    });
+    }, true);
 
     return response.json();
   },
@@ -23,7 +23,7 @@ const eventService = {
     await callWebApi({
       endpoint: `/events/${id}`,
       type: 'DELETE'
-    });
+    }, true);
 
     return '';
   },
@@ -32,7 +32,7 @@ const eventService = {
     const response = await callWebApi({
       endpoint: `/events/search/findAllByUserId?userId=${id}`,
       type: 'GET'
-    });
+    }, true);
 
     return response.json();
   },
@@ -42,7 +42,7 @@ const eventService = {
       endpoint: '/events',
       type: 'POST',
       request: event
-    });
+    }, true);
 
     return response.json();
   }

@@ -5,6 +5,7 @@ import {
   Route
 } from 'react-router-dom';
 
+import ProtectedRoute from './ProtectedRoute';
 import Login from '../components/Auth/Login';
 import HomePage from '../containers/HomePage/HomePage';
 import EventList from '../components/EventList/EventList';
@@ -18,11 +19,11 @@ const Router = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={HomePage} />
-      <Route exact path="/events" component={EventList} />
-      <Route exact path="/profile" component={UserProfile} />
-      <Route exact path="/event/:id" component={Event} />
-      <Route exact path="/userEvents" component={UserEvents} />
-      <Route exact path="/swipeCards" component={SwipeCards} />
+      <ProtectedRoute exact path="/events" component={EventList} />
+      <ProtectedRoute exact path="/profile" component={UserProfile} />
+      <ProtectedRoute exact path="/event/:id" component={Event} />
+      <ProtectedRoute exact path="/userEvents" component={UserEvents} />
+      <ProtectedRoute exact path="/swipeCards" component={SwipeCards} />
 
       <Route exact path="/login" component={Login} />
       <Route exact path="/sign-up" component={SignUp} />
