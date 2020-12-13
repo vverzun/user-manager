@@ -27,12 +27,14 @@ const HomePage = () => {
           </Fade>
         </Box>
 
-        <Box className={styles.browseWrapper} onClick={redirect('/events')}>
-          <Typography variant="h6">
-            Browse events near you
-          </Typography>
-          <ArrowForwardIcon className={styles.browseIcon} />
-        </Box>
+        <Fade in timeout={{ enter: 500, appear: 3000 }}>
+          <Box className={styles.browseWrapper} onClick={redirect('/events')}>
+            <Typography variant="h6">
+              Browse events near you
+            </Typography>
+            <ArrowForwardIcon className={styles.browseIcon} />
+          </Box>
+        </Fade>
       </Box>
     </Layout>
   );
