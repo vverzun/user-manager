@@ -11,7 +11,7 @@ import {
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { default as DeleteIcon } from '@material-ui/icons/Close';
+import DeleteIcon from '@material-ui/icons/Close';
 
 import { loadUserCreatedEvents, openModalAction } from '../../store/actions';
 import BackButton from '../common/BackButton/BackButton';

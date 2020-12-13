@@ -8,7 +8,8 @@ const actionTypes = {
   GET_EVENT: 'GET_EVENT',
   GET_USER_CREATED_EVENTS: 'GET_USER_CREATED_EVENTS',
   DELETE_EVENT: 'DELETE_EVENT',
-  POST_EVENT: 'POST_EVENT'
+  POST_EVENT: 'POST_EVENT',
+  GET_USER: 'GET_USER'
 };
 
 export default actionTypes;

@@ -16,11 +16,10 @@ export default (state, { type, payload }) => {
       };
 
     case actionTypes.OPEN_MODAL:
-      const { data, modalContentType } = payload;
       return {
         ...state,
         modalContentType: payload.modalContentType,
-        modalData: data,
+        modalData: payload.data,
         isModalOpened: true
       };
 
@@ -49,6 +48,12 @@ export default (state, { type, payload }) => {
         ...state,
         event: payload.event,
         isLoading: false
+      };
+
+    case actionTypes.GET_USER:
+      return {
+        ...state,
+        user: payload.user
       };
 
     case actionTypes.GET_USER_CREATED_EVENTS:
