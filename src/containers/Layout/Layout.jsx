@@ -56,8 +56,8 @@ const Layout = ({ children }) => {
               onClose={handleClose}
             >
               <MenuItem onClick={redirect('/')}>Home</MenuItem>
-              <MenuItem onClick={redirect('profile')}>Profile</MenuItem>
-              <MenuItem onClick={redirect('events')}>Events</MenuItem>
+              <MenuItem onClick={redirect('/profile')}>Profile</MenuItem>
+              <MenuItem onClick={redirect('/events')}>Events</MenuItem>
               <MenuItem>Logout</MenuItem>
             </Menu>
           </IconButton>

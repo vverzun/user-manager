@@ -27,7 +27,7 @@ const HomePage = () => {
           </Fade>
         </Box>
 
-        <Box className={styles.browseWrapper} onClick={redirect('events')}>
+        <Box className={styles.browseWrapper} onClick={redirect('/events')}>
           <Typography variant="h6">
             Browse events near you
           </Typography>
