@@ -7,7 +7,21 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from './store/reducer';
 
-const initialState = {};
+const initialState = {
+  allEvents: null,
+  event: {
+    title: '',
+    description: '',
+    location: '',
+    date: '',
+    participants: []
+  },
+
+  isModalOpened: false,
+
+  isLoading: false,
+  error: null
+};
 
 const middleware = composeWithDevTools(
   applyMiddleware(thunk)

@@ -14,19 +14,25 @@ import { loadEvent } from '../../store/actions';
 
 const Event = () => {
   const { id } = useParams();
-  const event = useSelector(state => state.event);
-  console.log(event);
+
+  const {
+    title,
+    description,
+    location,
+    date,
+    participants
+  } = useSelector(state => state.event);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(id);
     dispatch(loadEvent(id));
   }, []);
 
   return (
     <Layout>
       <BackButton />
-      {/* <Fade in timeout={{ enter: 500 }}>
+      <Fade in timeout={{ enter: 500 }}>
         <Card elevation={4} className={style.wrapper}>
           <Typography variant="h3" className={style.eventTitle}>
             {title}
@@ -70,7 +76,7 @@ const Event = () => {
             <Button variant="contained">Join</Button>
           </Box>
         </Card>
-      </Fade> */}
+      </Fade>
     </Layout>
   );
 };
