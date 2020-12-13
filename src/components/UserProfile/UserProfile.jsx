@@ -18,12 +18,12 @@ const UserProfile = () => {
     eventsVisited,
     eventsCreated
   } = useSelector(state => state.user);
-  const MOCK_USER_ID = useSelector(state => state.MOCK_USER_ID);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(loadUser(MOCK_USER_ID));
+    dispatch(loadUser());
   }, []);
 
   const redirect = useCallback(route => () => {

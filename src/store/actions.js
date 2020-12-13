@@ -103,8 +103,8 @@ export const loadEvent = id => async dispatch => {
   asyncAction(dispatch, eventService.getEvent, [id], getEventAction);
 };
 
-export const loadUser = id => async dispatch => {
-  asyncAction(dispatch, userService.getUser, [id], getUserAction);
+export const loadUser = () => async dispatch => {
+  asyncAction(dispatch, userService.getUser, [], getUserAction);
 };
 
 export const loadCreateUser = (user, history) => async dispatch => {
@@ -121,15 +121,14 @@ export const loadLoginUser = (user, history) => async dispatch => {
     });
 };
 
-export const loadUserCreatedEvents = id => async dispatch => {
-  asyncAction(dispatch, eventService.getUserCreatedEvents, [id], getUserCreatedEventsAction);
+export const loadUserCreatedEvents = () => async dispatch => {
+  asyncAction(dispatch, eventService.getUserCreatedEvents, [], getUserCreatedEventsAction);
 };
 
 export const deleteEvent = eventId => async dispatch => {
   asyncAction(dispatch, eventService.deleteEvent, [eventId], deleteEventAction)
     .then(() => {
-      const userId = store.getState().MOCK_USER_ID;
-      dispatch(loadUserCreatedEvents(userId))
+      dispatch(loadUserCreatedEvents())
         .then(() => {
           dispatch(closeModalAction());
         });

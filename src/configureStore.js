@@ -30,8 +30,7 @@ const initialState = {
   modalContentType: null,
 
   isLoading: false,
-  error: null,
-  MOCK_USER_ID: 'fedab535-56ad-4c12-9b4e-c409e8233f8d'
+  error: null
 };
 
 const middleware = composeWithDevTools(

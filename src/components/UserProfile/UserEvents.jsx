@@ -21,8 +21,6 @@ import { MODAL_TYPES } from '../../constants/modal';
 
 const TRANSITION_TIME = 350;
 
-const MOCK_USER_ID = 'fedab535-56ad-4c12-9b4e-c409e8233f8d';
-
 const UserEvents = () => {
   const history = useHistory();
   const handleViewEventDetails = useCallback(id => () => {
@@ -41,7 +39,7 @@ const UserEvents = () => {
   const isLoading = useSelector(state => state.isLoading);
 
   useEffect(() => {
-    dispatch(loadUserCreatedEvents(MOCK_USER_ID));
+    dispatch(loadUserCreatedEvents());
   }, []);
 
   const renderEvents = useCallback(() => {

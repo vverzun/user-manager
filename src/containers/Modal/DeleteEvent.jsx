@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -7,8 +8,6 @@ import { useDispatch } from 'react-redux';
 
 import { deleteEvent as deleteEventAction, closeModalAction } from '../../store/actions';
 
-const MOCK_USER_ID = 'fedab535-56ad-4c12-9b4e-c409e8233f8d';
-
 const DeleteEvent = ({ data: { eventId } }) => {
   const dispatch = useDispatch();
   const handleCloseModal = () => {
@@ -16,7 +15,7 @@ const DeleteEvent = ({ data: { eventId } }) => {
   };
 
   const handleConfirm = () => {
-    dispatch(deleteEventAction(eventId, MOCK_USER_ID));
+    dispatch(deleteEventAction(eventId));
     dispatch(closeModalAction());
   };
 
@@ -38,6 +37,12 @@ const DeleteEvent = ({ data: { eventId } }) => {
       </DialogActions>
     </>
   );
+};
+
+DeleteEvent.propTypes = {
+  data: PropTypes.exact({
+    eventId: PropTypes.string
+  }).isRequired
 };
 
 export default DeleteEvent;

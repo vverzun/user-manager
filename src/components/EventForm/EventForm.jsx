@@ -16,7 +16,6 @@ const PARTY_TYPES = ['DRINKING', 'SPORTS', 'MOVIES', 'ACTION', 'READING', 'BIBLE
 
 const EventForm = ({ title }) => {
   const dispatch = useDispatch();
-  const username = useSelector(state => state.MOCK_USER_name);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -26,9 +25,7 @@ const EventForm = ({ title }) => {
     location: '',
     description: '',
     duration: '',
-    radius: '',
-    createdBy: { name: username },
-    participants: [{ name: username }]
+    radius: ''
   });
 
   const handleInputChange = useCallback(event => {

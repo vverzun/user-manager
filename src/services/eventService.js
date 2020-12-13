@@ -38,9 +38,9 @@ const eventService = {
     return '';
   },
 
-  getUserCreatedEvents: async id => {
+  getUserCreatedEvents: async () => {
     const response = await callWebApi({
-      endpoint: `/events/search/findAllByUserId?userId=${id}`,
+      endpoint: '/events/search/findAllByUserId',
       type: 'GET'
     }, true);
 
