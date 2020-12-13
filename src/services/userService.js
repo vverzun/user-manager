@@ -5,7 +5,7 @@ const userService = {
     const response = await callWebApi({
       endpoint: `/users/${id}`,
       type: 'GET'
-    });
+    }, true);
     return response.json();
   },
 

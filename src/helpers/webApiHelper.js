@@ -7,11 +7,16 @@ const getFetchUrl = args => {
   return `${baseURL}${args.endpoint}`;
 };
 
-const getFetchArgs = args => {
+const getFetchArgs = (args, isProtected = false) => {
   const headers = {
     'Content-Type': 'application/json',
     Accept: 'application/json'
   };
+
+  if (isProtected) {
+    const jwtToken = localStorage.getItem('jwtToken');
+    headers.Authorization = `Bearer ${jwtToken}`;
+  }
 
   let body;
   if (args.request) {
@@ -43,10 +48,10 @@ const throwIfResponseFailed = async res => {
   }
 };
 
-const callWebApi = async args => {
+const callWebApi = async (args, isProtected) => {
   const res = await fetch(
     getFetchUrl(args),
-    getFetchArgs(args)
+    getFetchArgs(args, isProtected)
   );
 
   await throwIfResponseFailed(res);
