@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import actionTypes from './actionTypes';
 import asyncAction from '../helpers/asyncActionHelper';
 import eventService from '../services/eventService';
@@ -14,10 +15,10 @@ export const closeErrorAction = () => ({
   type: actionTypes.CLOSE_ERROR
 });
 
-const getAllEventsAction = allEvents => ({
+const getAllEventsAction = data => ({
   type: actionTypes.GET_ALL_EVENTS,
   payload: {
-    allEvents
+    allEvents: data._embedded.events
   }
 });
 
