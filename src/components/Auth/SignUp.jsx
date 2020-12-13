@@ -42,7 +42,7 @@ const SignUp = () => {
           className={style.button}
           onClick={handleSignUp}
         >
-          Login
+          Sign Up
         </Button>
         <Link to="/login" className={style.link}>
           Already have an account? Login

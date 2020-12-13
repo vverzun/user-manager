@@ -2,7 +2,13 @@ import actionTypes from './actionTypes';
 
 const initialState = {
   allEvents: null,
-  event: null,
+  event: {
+    title: '',
+    date: '',
+    description: '',
+    participants: [],
+    location: ''
+  },
 
   isModalOpened: false,
 

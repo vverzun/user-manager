@@ -12,7 +12,7 @@ const eventService = {
 
   getEvent: async id => {
     const response = await callWebApi({
-      endpoint: `/event/${id}`,
+      endpoint: `/events/${id}`,
       type: 'GET'
     });
 
