@@ -1,7 +1,9 @@
-import {
+import actionTypes from '../store/actionTypes';
+
+const {
   ASYNC_ACTION_PENDING,
   ASYNC_ACTION_ERROR
-} from '../containers/Manager/actionTypes';
+} = actionTypes;
 
 const asyncActionPending = () => ({
   type: ASYNC_ACTION_PENDING

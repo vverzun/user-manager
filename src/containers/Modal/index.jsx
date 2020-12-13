@@ -1,72 +1,31 @@
 import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Dialog from '@material-ui/core/Dialog';
-
-import UserForm from '../../components/UserForm';
 import EventForm from '../../components/EventForm/EventForm';
-import Confirmation from '../../components/Confirmation';
-import { closeModal } from './actions';
-import { CREATE, UPDATE, CONFIRM, MODAL_TYPES } from '../../constants/modal';
 import style from './styles.modules.scss';
+import { closeModalAction } from '../../store/actions';
 
 const Modal = () => {
-  const isOpened = useSelector(state => state.modal.isOpened);
-  const contentType = useSelector(state => state.modal.contentType);
-  const userData = useSelector(state => state.modal.contentData);
+  const isModalOpened = useSelector(state => state.isModalOpened);
 
   const dispatch = useDispatch();
 
   const handleClose = useCallback(() => {
-    dispatch(closeModal());
+    dispatch(closeModalAction());
   }, []);
 
   return (
     <Dialog
-      open={isOpened}
+      open={isModalOpened}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
 
     >
-      {
-        contentType === MODAL_TYPES.CREATE_EVENT
-          && (
-            <EventForm
-              title="Create New Event"
-              contentText="Fill the inputs below."
-              className={style.modalWrapper}
-            />
-          )
-      }
-
-      {
-        contentType === CREATE
-          && (
-            <UserForm
-              title="Create New User"
-              contentText="Fill the inputs below."
-            />
-          )
-      }
-      {
-        contentType === UPDATE
-          && (
-            <UserForm
-              title="Update User"
-              contentText="Edit the inputs below."
-              contentData={userData}
-            />
-          )
-      }
-      {
-        contentType === CONFIRM
-          && (
-            <Confirmation
-              title="Confirmation"
-              contentText="Are you sure you want to delete user?"
-              contentData={userData}
-            />
-          )
-      }
+      <EventForm
+        title="Create New Event"
+        contentText="Fill the inputs below."
+        className={style.modalWrapper}
+      />
     </Dialog>
   );
 };

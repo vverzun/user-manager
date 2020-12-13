@@ -1,7 +1,0 @@
-const actionTypes = {
-  GET_EVENTS: 'GET_EVENTS',
-  ASYNC_ACTION_PENDING: 'ASYNC_ACTION_PENDING',
-  ASYNC_ACTION_ERROR: 'ASYNC_ACTION_ERROR'
-};
-
-export default actionTypes;

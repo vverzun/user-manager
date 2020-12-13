@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import Router from '../../router';
-import store from '../../storeConfig';
+import store from '../../configureStore';
 import Modal from '../Modal';
 import './style.module.scss';
 

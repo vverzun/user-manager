@@ -10,7 +10,7 @@ import {
   Box,
   Grow
 } from '@material-ui/core';
-import { loadEvents } from '../../store/events/actions';
+import { loadAllEvents } from '../../store/actions';
 
 import Layout from '../../containers/Layout/Layout';
 import style from './style.module.scss';
@@ -25,17 +25,17 @@ const EventList = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const events = useSelector(state => state.events.events);
-  const isLoading = useSelector(state => state.events.isLoading);
+  const allEvents = useSelector(state => state.allEvents);
+  const isLoading = useSelector(state => state.isLoading);
 
-  const eventList = _.get(events, '_embedded.events');
+  // const eventList = _.get(events, '_embedded.events');
 
   useEffect(() => {
-    dispatch(loadEvents());
+    dispatch(loadAllEvents());
   }, []);
 
   const renderEvents = useCallback(() => (
-    _.map(eventList, ({ title, date, location, id }, index) => (
+    _.map(allEvents, ({ title, date, location, id }, index) => (
       <Grow in timeout={TRANSITION_TIME * index + TRANSITION_TIME}>
         <Card
           key={id}
@@ -55,7 +55,7 @@ const EventList = () => {
         </Card>
       </Grow>
     ))
-  ), [eventList]);
+  ), [allEvents]);
 
   return (
     <Layout>
