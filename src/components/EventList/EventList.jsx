@@ -10,8 +10,9 @@ import {
   Box,
   Grow
 } from '@material-ui/core';
-import { loadEvents } from '../../store/events/actions';
+import Skeleton from '@material-ui/lab/Skeleton';
 
+import { loadEvents } from '../../store/events/actions';
 import Layout from '../../containers/Layout/Layout';
 import style from './style.module.scss';
 import BackButton from '../common/BackButton/BackButton';
@@ -27,6 +28,7 @@ const EventList = () => {
   const dispatch = useDispatch();
   const events = useSelector(state => state.events.events);
   const isLoading = useSelector(state => state.events.isLoading);
+  const error = useSelector(state => state.events.error);
 
   const eventList = _.get(events, '_embedded.events');
 
@@ -34,8 +36,28 @@ const EventList = () => {
     dispatch(loadEvents());
   }, []);
 
-  const renderEvents = useCallback(() => (
-    _.map(eventList, ({ title, date, location, id }, index) => (
+  const renderEvents = useCallback(() => {
+    if (error) {
+      return <Typography>Error while fetching events</Typography>;
+    }
+
+    if (isLoading) {
+      return (
+        <>
+          <Skeleton className={style.skeletonCard} variant="rect" width={350} height={130} />
+          <Skeleton className={style.skeletonCard} variant="rect" width={350} height={130} />
+          <Skeleton className={style.skeletonCard} variant="rect" width={350} height={130} />
+          <Skeleton className={style.skeletonCard} variant="rect" width={350} height={130} />
+          <Skeleton className={style.skeletonCard} variant="rect" width={350} height={130} />
+        </>
+      );
+    }
+
+    if (_.isEmpty(eventList)) {
+      return <Typography>There are no events right now</Typography>;
+    }
+
+    return _.map(eventList, ({ title, date, location, id }, index) => (
       <Grow in timeout={TRANSITION_TIME * index + TRANSITION_TIME}>
         <Card
           key={id}
@@ -54,8 +76,8 @@ const EventList = () => {
           </CardContent>
         </Card>
       </Grow>
-    ))
-  ), [eventList]);
+    ));
+  });
 
   return (
     <Layout>
