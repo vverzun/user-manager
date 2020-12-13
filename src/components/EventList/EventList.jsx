@@ -6,13 +6,16 @@ import {
   Typography,
   Card,
   CardContent,
-  Box
+  Box,
+  Grow
 } from '@material-ui/core';
 
 import Layout from '../../containers/Layout/Layout';
 import style from './style.module.scss';
 import eventList from '../../mockData/eventList';
 import BackButton from '../common/BackButton/BackButton';
+
+const TRANSITION_TIME = 350;
 
 const EventList = () => {
   const history = useHistory();
@@ -21,23 +24,25 @@ const EventList = () => {
   }, []);
 
   const renderEvents = useCallback(() => (
-    _.map(eventList, ({ title, date, location, id }) => (
-      <Card
-        key={id}
-        className={style.eventCard}
-        onClick={handleViewEventDetails(id)}
-        elevation="3"
-      >
-        <CardContent>
-          <Typography variant="h6">{title}</Typography>
-          <Typography>
-            Place:
-            {' '}
-            {location}
-          </Typography>
-          <Typography>{moment(date).format('MM:HH DD MMM')}</Typography>
-        </CardContent>
-      </Card>
+    _.map(eventList, ({ title, date, location, id }, index) => (
+      <Grow in timeout={TRANSITION_TIME * index + TRANSITION_TIME}>
+        <Card
+          key={id}
+          className={style.eventCard}
+          onClick={handleViewEventDetails(id)}
+          elevation={3}
+        >
+          <CardContent>
+            <Typography variant="h6">{title}</Typography>
+            <Typography>
+              Place:
+              {' '}
+              {location}
+            </Typography>
+            <Typography>{moment(date).format('MM:HH DD MMM')}</Typography>
+          </CardContent>
+        </Card>
+      </Grow>
     ))
   ), [eventList]);
 

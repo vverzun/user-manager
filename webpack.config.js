@@ -18,12 +18,12 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: 'pre',
-        test: /\.(js|jsx)$/,
-        loader: 'eslint-loader',
-        options: {
-          fix: true
-        }
+        // enforce: 'pre',
+        // test: /\.(js|jsx)$/,
+        // loader: 'eslint-loader',
+        // options: {
+        //   fix: true
+        // }
       },
       {
         test: /\.(js|jsx)$/,

@@ -25,7 +25,7 @@ const Event = () => {
   return (
     <Layout>
       <BackButton />
-      <Card elevation="4" className={style.wrapper}>
+      <Card elevation={4} className={style.wrapper}>
         <Typography variant="h3" className={style.eventTitle}>
           {title}
         </Typography>

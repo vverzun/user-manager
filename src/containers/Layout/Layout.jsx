@@ -80,7 +80,7 @@ Layout.defaultProps = {
 };
 
 Layout.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.object)
+  children: PropTypes.object
 };
 
 export default Layout;
