@@ -1,12 +1,10 @@
 import React, { useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
 import {
   Box,
   AppBar,
   Toolbar,
   Typography,
   Button,
-  IconButton,
   Menu,
   MenuItem
 } from '@material-ui/core';
@@ -40,33 +38,27 @@ const Layout = ({ children }) => {
     <Box className={styles.layout}>
       <AppBar position="static">
         <Toolbar className={styles.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
+          <Button
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+            className={styles.menuButton}
           >
-            <Button
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-              className={styles.menuButton}
-            >
-              <MenuIcon className={styles.menuIcon} />
-            </Button>
+            <MenuIcon className={styles.menuIcon} />
+          </Button>
 
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={redirect('/')}>Home</MenuItem>
-              <MenuItem onClick={redirect('/profile')}>Profile</MenuItem>
-              <MenuItem onClick={redirect('/events')}>Events</MenuItem>
-              <MenuItem>Logout</MenuItem>
-            </Menu>
-          </IconButton>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={redirect('/')}>Home</MenuItem>
+            <MenuItem onClick={redirect('/profile')}>Profile</MenuItem>
+            <MenuItem onClick={redirect('/events')}>Events</MenuItem>
+            <MenuItem>Logout</MenuItem>
+          </Menu>
 
           <Typography variant="h6" className={styles.headerTitle}>
             Partynder
@@ -85,7 +77,7 @@ Layout.defaultProps = {
 };
 
 Layout.propTypes = {
-  children: PropTypes.object
+  children: PropTypes.node
 };
 
 export default Layout;
