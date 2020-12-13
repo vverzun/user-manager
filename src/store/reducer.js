@@ -1,16 +1,6 @@
 import actionTypes from './actionTypes';
 
-const initialState = {
-  allEvents: null,
-  event: null,
-
-  isModalOpened: false,
-
-  isLoading: false,
-  error: null
-};
-
-export default (state = initialState, action) => {
+export default (state, action) => {
   switch (action.type) {
     case actionTypes.ASYNC_ACTION_PENDING:
       return {

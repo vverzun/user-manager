@@ -14,12 +14,14 @@ import { loadEvent } from '../../store/actions';
 
 const Event = () => {
   const { id } = useParams();
+
   const {
     title,
-    date,
     description,
-    participants,
-    location } = useSelector(state => state.event);
+    location,
+    date,
+    participants
+  } = useSelector(state => state.event);
 
   const dispatch = useDispatch();
 
