@@ -4,7 +4,6 @@
     // justify-content: center;
     align-items: center;
     padding: 1.5em;
-    border-bottom: 1px solid black;
 
     picture {
       width: 100px;
@@ -35,5 +34,46 @@
   .eventButtonWrapper {
     display: flex;
     justify-content: center;
+    margin-top: 25px;
+  }
+
+  .myEventsWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+  
+    .myEventsIcon {
+      font-size: 2rem;
+    }
   }
 };
+
+.eventsWrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 10px 25px 25px;
+  
+  .eventCard {
+    width: 100%;
+    position: relative;
+    
+    &:not(:last-of-type) {
+      margin-bottom: 25px;
+    }
+  }
+
+  .deleteIcon {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
+  }
+}
+
+.skeletonCard {
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
