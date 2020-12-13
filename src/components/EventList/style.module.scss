@@ -1,14 +1,17 @@
-.eventsWrapper {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  padding: 25px;
-
-  .eventCard {
-    width: 100%;
-
-    &:not(:last-of-type) {
-      margin-bottom: 25px;
+.eventList {
+  .eventsWrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    padding: 25px;
+    
+    .eventCard {
+      width: 100%;
+      
+      &:not(:last-of-type) {
+        margin-bottom: 25px;
+      }
     }
   }
+
 }

@@ -10,6 +10,7 @@ import user from '../../assets/images/user.png';
 import style from './style.module.scss';
 import userData from '../../mockData/userProfile';
 import Layout from '../../containers/Layout/Layout';
+import BackButton from '../common/BackButton/BackButton';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const Header = () => {
 
   return (
     <Layout>
+      <BackButton />
+
       <Box className={style.container}>
         <Box className={style.header}>
           <picture>

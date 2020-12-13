@@ -3,11 +3,12 @@ import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { Avatar, Box, Button, Card, Typography } from '@material-ui/core';
+
 import avatar from '../../assets/images/avatar.png';
 import party from '../../assets/images/party.jpeg';
 import style from './style.module.scss';
 import Layout from '../../containers/Layout/Layout';
-
+import BackButton from '../common/BackButton/BackButton';
 import eventList from '../../mockData/eventList';
 
 const Event = () => {
@@ -23,6 +24,7 @@ const Event = () => {
 
   return (
     <Layout>
+      <BackButton />
       <Card elevation="4" className={style.wrapper}>
         <Typography variant="h3" className={style.eventTitle}>
           {title}
