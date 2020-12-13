@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
@@ -8,7 +8,13 @@ import {
   Card,
   CardContent,
   Box,
-  Grow
+  Grow,
+  Collapse,
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  InputLabel
 } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
@@ -19,7 +25,32 @@ import BackButton from '../common/BackButton/BackButton';
 
 const TRANSITION_TIME = 350;
 
+const PARTY_TYPES = ['DRINKING', 'SPORTS', 'MOVIES', 'ACTION', 'READING', 'BIBLE_STUDY', 'OTHER'];
+
 const EventList = () => {
+  const [formData, setFormData] = useState({
+    radius: '10',
+    eventDate: {
+      from: null,
+      to: null
+    },
+    createdDate: {
+      from: null,
+      to: null
+    },
+    partyType: 'OTHER'
+  });
+
+  const [isFilterCollapsed, setIsFilterCollapsed] = useState(false);
+
+  const handleInputChange = useCallback(event => {
+    event.persist();
+
+    const [name, value] = _.at(event, 'target.name', 'target.value');
+
+    setFormData(_.set({ ...formData }, name, value));
+  }, [formData]);
+
   const history = useHistory();
   const handleViewEventDetails = useCallback(id => () => {
     history.push(`/event/${id}`);
@@ -76,6 +107,49 @@ const EventList = () => {
     ));
   }, [allEvents, isLoading]);
 
+  const renderPartyTypeOptions = () => (
+    _.map(PARTY_TYPES, type => (
+      <MenuItem value={type} key={type} name="partyType">
+        {type}
+      </MenuItem>
+    ))
+  );
+
+  const toggleFilters = () => {
+    setIsFilterCollapsed(!isFilterCollapsed);
+  };
+
+  const isRangeValid = rangeObj => {
+    if (rangeObj.from && rangeObj.to) {
+      return true;
+    }
+
+    return false;
+  };
+
+  const validateFilters = filters => {
+    const mappedFilters = {};
+
+    _.forEach(filters, (value, key) => {
+      if (!_.isEmpty(value)) {
+        if (key === 'eventDate' || key === 'createdDate') {
+          if (isRangeValid(value)) {
+            mappedFilters[key] = value;
+          }
+        } else {
+          mappedFilters[key] = value;
+        }
+      }
+    });
+
+    return mappedFilters;
+  };
+
+  const handleSearch = () => {
+    const mappedFilters = validateFilters(formData);
+    console.log('mappedFilters', mappedFilters);
+  };
+
   return (
     <Layout>
       <Box className={style.eventList}>
@@ -84,6 +158,104 @@ const EventList = () => {
         <Typography variant="h5" align="center">
           Events list
         </Typography>
+
+        <Box className={style.filtersButtonWrapper}>
+          <Button
+            variant="outlined"
+            className={style.button}
+            onClick={toggleFilters}
+          >
+            Filters
+          </Button>
+        </Box>
+
+        <Collapse in={isFilterCollapsed}>
+          <Box className={style.filtersWrapper}>
+            <TextField
+              name="radius"
+              label="Radius"
+              variant="outlined"
+              className={style.input}
+              onChange={handleInputChange}
+              value={formData.radius}
+            />
+
+            <TextField
+              name="eventDate.from"
+              label="Event Date From"
+              type="date"
+              InputLabelProps={{
+                shrink: true
+              }}
+              variant="outlined"
+              className={style.input}
+              onChange={handleInputChange}
+              value={formData.eventDate.from}
+            />
+
+            <TextField
+              name="eventDate.to"
+              label="Event Date To"
+              type="date"
+              InputLabelProps={{
+                shrink: true
+              }}
+              variant="outlined"
+              className={style.input}
+              onChange={handleInputChange}
+              value={formData.eventDate.to}
+            />
+
+            <TextField
+              name="createdDate.from"
+              label="Created Date From"
+              type="date"
+              InputLabelProps={{
+                shrink: true
+              }}
+              variant="outlined"
+              className={style.input}
+              onChange={handleInputChange}
+              value={formData.createdDate.from}
+            />
+
+            <TextField
+              name="createdDate.to"
+              label="Created Date To"
+              type="date"
+              InputLabelProps={{
+                shrink: true
+              }}
+              variant="outlined"
+              className={style.input}
+              onChange={handleInputChange}
+              value={formData.createdDate.to}
+            />
+
+            <Box className={style.inputSelect}>
+              <InputLabel id="demo-simple-select-outlined-label">
+                Party type
+              </InputLabel>
+              <Select
+                name="partyType"
+                labelId="demo-simple-select-outlined-label"
+                placeholder="Party type"
+                onChange={handleInputChange}
+                value={formData.partyType}
+              >
+                {renderPartyTypeOptions()}
+              </Select>
+            </Box>
+
+            <Button
+              variant="outlined"
+              className={style.button}
+              onClick={handleSearch}
+            >
+              Search
+            </Button>
+          </Box>
+        </Collapse>
 
         <Box className={style.eventsWrapper}>
           {renderEvents()}
