@@ -33,6 +33,6 @@ export const loadAllEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getAllEvents, [], getAllEventsAction);
 };
 
-export const loadEvent = () => async dispatch => { // add id here
-  asyncAction(dispatch, eventService.getEvent, [], getEventAction);
+export const loadEvent = id => async dispatch => {
+  asyncAction(dispatch, eventService.getEvent, [id], getEventAction);
 };
