@@ -35,14 +35,18 @@ const EventList = () => {
 
   const renderEvents = useCallback(() => {
     if (isLoading) {
+      const cards = _.range(5);
+
       return (
-        <>
-          <Skeleton className={style.skeletonCard} variant="rect" width={350} height={130} />
-          <Skeleton className={style.skeletonCard} variant="rect" width={350} height={130} />
-          <Skeleton className={style.skeletonCard} variant="rect" width={350} height={130} />
-          <Skeleton className={style.skeletonCard} variant="rect" width={350} height={130} />
-          <Skeleton className={style.skeletonCard} variant="rect" width={350} height={130} />
-        </>
+        _.map(cards, (el, index) => (
+          <Skeleton
+            key={index}
+            className={style.skeletonCard}
+            variant="rect"
+            width={350}
+            height={130}
+          />
+        ))
       );
     }
 
@@ -51,7 +55,7 @@ const EventList = () => {
     }
 
     return _.map(allEvents, ({ title, date, location, id }, index) => (
-      <Grow in timeout={TRANSITION_TIME * index + TRANSITION_TIME}>
+      <Grow in timeout={TRANSITION_TIME * index + TRANSITION_TIME} key={id}>
         <Card
           key={id}
           className={style.eventCard}
