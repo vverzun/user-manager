@@ -66,6 +66,20 @@ const getUserAction = user => ({
   }
 });
 
+const postUserAction = user => ({
+  type: actionTypes.POST_USER,
+  payload: {
+    user
+  }
+});
+
+const loginUserAction = jwtToken => ({
+  type: actionTypes.LOGIN_USER,
+  payload: {
+    jwtToken
+  }
+});
+
 export const loadAllEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getAllEvents, [], getAllEventsAction);
 };
@@ -76,6 +90,20 @@ export const loadEvent = id => async dispatch => {
 
 export const loadUser = id => async dispatch => {
   asyncAction(dispatch, userService.getUser, [id], getUserAction);
+};
+
+export const loadCreateUser = (user, history) => async dispatch => {
+  asyncAction(dispatch, userService.postUser, [user], postUserAction)
+    .then(() => {
+      history.push('/login');
+    });
+};
+
+export const loadLoginUser = (user, history) => async dispatch => {
+  asyncAction(dispatch, userService.loginUser, [user], loginUserAction)
+    .then(() => {
+      history.push('/');
+    });
 };
 
 export const loadUserCreatedEvents = id => async dispatch => {

@@ -7,6 +7,24 @@ const userService = {
       type: 'GET'
     });
     return response.json();
+  },
+
+  postUser: async user => {
+    const response = await callWebApi({
+      endpoint: '/users',
+      type: 'POST',
+      request: user
+    });
+    return response.json();
+  },
+
+  loginUser: async user => {
+    const response = await callWebApi({
+      endpoint: '/login',
+      type: 'POST',
+      request: user
+    });
+    return response.json();
   }
 };
 

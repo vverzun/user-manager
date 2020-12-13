@@ -56,6 +56,19 @@ export default (state, { type, payload }) => {
         user: payload.user
       };
 
+    case actionTypes.POST_USER:
+      return {
+        ...state,
+        user: payload.user
+      };
+
+    case actionTypes.LOGIN_USER:
+      localStorage.setItem('jwtToken', payload.jwtToken.jwtToken);
+
+      return {
+        ...state
+      };
+
     case actionTypes.GET_USER_CREATED_EVENTS:
       return {
         ...state,
