@@ -73,6 +73,13 @@ const postUserAction = user => ({
   }
 });
 
+const loginUserAction = jwtToken => ({
+  type: actionTypes.LOGIN_USER,
+  payload: {
+    jwtToken
+  }
+});
+
 export const loadAllEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getAllEvents, [], getAllEventsAction);
 };
@@ -89,6 +96,13 @@ export const loadCreateUser = (user, history) => async dispatch => {
   asyncAction(dispatch, userService.postUser, [user], postUserAction)
     .then(() => {
       history.push('/login');
+    });
+};
+
+export const loadLoginUser = (user, history) => async dispatch => {
+  asyncAction(dispatch, userService.loginUser, [user], loginUserAction)
+    .then(() => {
+      history.push('/');
     });
 };
 

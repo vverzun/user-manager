@@ -10,7 +10,7 @@ const actionTypes = {
   DELETE_EVENT: 'DELETE_EVENT',
   POST_EVENT: 'POST_EVENT',
   GET_USER: 'GET_USER',
-  POST_USER: 'POST_USER'
+  LOGIN_USER: 'LOGIN_USER'
 };
 
 export default actionTypes;
