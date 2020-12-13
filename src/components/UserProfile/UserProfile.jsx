@@ -1,35 +1,44 @@
-import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Typography, Box, Button, Divider } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-import { openModalAction } from '../../store/actions';
+import { openModalAction, loadUser } from '../../store/actions';
 import user from '../../assets/images/user.png';
 import style from './style.module.scss';
-import userData from '../../mockData/userProfile';
 import Layout from '../../containers/Layout/Layout';
 import BackButton from '../common/BackButton/BackButton';
 import { MODAL_TYPES } from '../../constants/modal';
 
 const UserProfile = () => {
+  const {
+    firstName,
+    lastName,
+    eventsVisited,
+    eventsCreated
+  } = useSelector(state => state.user);
+  const MOCK_USER_ID = useSelector(state => state.MOCK_USER_ID);
   const dispatch = useDispatch();
-
   const history = useHistory();
+
+  useEffect(() => {
+    dispatch(loadUser(MOCK_USER_ID));
+  }, []);
+
   const redirect = useCallback(route => () => {
     history.push(route);
   }, []);
 
   const handleModalOpen = useCallback(() => {
-    dispatch(openModalAction({ modalContentType: MODAL_TYPES.CREATE_EVENT }));
+    dispatch(openModalAction({
+      modalContentType: MODAL_TYPES.CREATE_EVENT
+    }));
   }, []);
-
-  const { firstName, lastName, eventsVisited, eventsCreated } = userData;
 
   return (
     <Layout>
       <BackButton />
-
       <Box className={style.container}>
         <Box className={style.header}>
           <picture>

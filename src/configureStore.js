@@ -16,6 +16,13 @@ const initialState = {
     date: '',
     participants: []
   },
+
+  user: {
+    firstName: '',
+    lastName: '',
+    eventsCreated: 0,
+    eventsVisited: 0
+  },
   userCreatedEvents: [],
 
   isModalOpened: false,

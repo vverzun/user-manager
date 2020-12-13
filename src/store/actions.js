@@ -2,6 +2,7 @@
 import actionTypes from './actionTypes';
 import asyncAction from '../helpers/asyncActionHelper';
 import eventService from '../services/eventService';
+import userService from '../services/userService';
 import store from '../configureStore';
 
 export const openModalAction = ({ modalContentType, data }) => ({
@@ -58,12 +59,23 @@ const getUserCreatedEventsAction = data => ({
   }
 });
 
+const getUserAction = user => ({
+  type: actionTypes.GET_USER,
+  payload: {
+    user
+  }
+});
+
 export const loadAllEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getAllEvents, [], getAllEventsAction);
 };
 
 export const loadEvent = id => async dispatch => {
   asyncAction(dispatch, eventService.getEvent, [id], getEventAction);
+};
+
+export const loadUser = id => async dispatch => {
+  asyncAction(dispatch, userService.getUser, [id], getUserAction);
 };
 
 export const loadUserCreatedEvents = id => async dispatch => {
