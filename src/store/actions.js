@@ -31,6 +31,13 @@ const getAllEventsAction = data => ({
   }
 });
 
+const getAllEventsFilteredAction = data => ({
+  type: actionTypes.GET_ALL_EVENTS,
+  payload: {
+    allEvents: data
+  }
+});
+
 const getEventAction = event => ({
   type: actionTypes.GET_EVENT,
   payload: {
@@ -86,6 +93,10 @@ export const logout = () => ({
 
 export const loadAllEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getAllEvents, [], getAllEventsAction);
+};
+
+export const loadAllEventsFiltered = filters => async dispatch => {
+  asyncAction(dispatch, eventService.getAllEventsFiltered, [filters], getAllEventsFilteredAction);
 };
 
 export const loadEvent = id => async dispatch => {

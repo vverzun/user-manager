@@ -16,10 +16,12 @@ import {
   MenuItem,
   InputLabel
 } from '@material-ui/core';
+import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import Layout from '../../containers/Layout/Layout';
-import { loadAllEvents } from '../../store/actions';
+import { loadAllEvents, loadAllEventsFiltered } from '../../store/actions';
 import style from './style.module.scss';
 import BackButton from '../common/BackButton/BackButton';
 
@@ -82,7 +84,7 @@ const EventList = () => {
     }
 
     if (_.isEmpty(allEvents)) {
-      return <Typography>There are no events right now</Typography>;
+      return <Typography align="center">There are no events right now</Typography>;
     }
 
     return _.map(allEvents, ({ title, date, location, id }, index) => (
@@ -119,9 +121,12 @@ const EventList = () => {
     setIsFilterCollapsed(!isFilterCollapsed);
   };
 
-  const isRangeValid = rangeObj => {
+  const getValidRange = rangeObj => {
     if (rangeObj.from && rangeObj.to) {
-      return true;
+      return {
+        from: moment(rangeObj.from).valueOf(),
+        to: moment(rangeObj.to).valueOf()
+      };
     }
 
     return false;
@@ -131,14 +136,15 @@ const EventList = () => {
     const mappedFilters = {};
 
     _.forEach(filters, (value, key) => {
-      if (!_.isEmpty(value)) {
-        if (key === 'eventDate' || key === 'createdDate') {
-          if (isRangeValid(value)) {
-            mappedFilters[key] = value;
-          }
+      if (key === 'eventDate' || key === 'createdDate') {
+        const validRange = getValidRange(value);
+        if (validRange) {
+          mappedFilters[key] = validRange;
         } else {
-          mappedFilters[key] = value;
+          mappedFilters[key] = null;
         }
+      } else {
+        mappedFilters[key] = value;
       }
     });
 
@@ -147,7 +153,7 @@ const EventList = () => {
 
   const handleSearch = () => {
     const mappedFilters = validateFilters(formData);
-    console.log('mappedFilters', mappedFilters);
+    dispatch(loadAllEventsFiltered(mappedFilters));
   };
 
   return (
@@ -166,6 +172,7 @@ const EventList = () => {
             onClick={toggleFilters}
           >
             Filters
+            {isFilterCollapsed ? <ExpandLessIcon /> : <ExpandMoreIcon />}
           </Button>
         </Box>
 

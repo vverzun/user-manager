@@ -10,7 +10,6 @@ import style from './style.module.scss';
 
 const ErrorAlert = () => {
   const error = useSelector(state => state.error);
-  console.log('error', error);
 
   const dispatch = useDispatch();
 
@@ -18,6 +17,9 @@ const ErrorAlert = () => {
     dispatch(closeErrorAction());
   }, []);
 
+  if (error) {
+    console.log('error', error);
+  }
   return (
     <div className={style.container}>
       <Collapse in={Boolean(error)}>
