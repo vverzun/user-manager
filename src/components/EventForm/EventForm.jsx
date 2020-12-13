@@ -7,82 +7,97 @@ import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 
-import { closeModalAction } from '../../store/actions';
+import { loadCreateEvent, closeModalAction } from '../../store/actions';
 
-const EventForm = ({ title, contentData }) => {
-  const { user, id } = contentData;
-  const [userEntity, setUserValue] = useState({ ...user });
-
+const EventForm = ({ title }) => {
   const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState({
+    title: '',
+    eventDate: '2017-05-24T10:30',
+    creationDate: new Date(),
+    location: '',
+    description: '',
+    duration: '',
+    radius: '',
+    createdBy: '998425f3-d7ab-44c4-ba59-8d8a7d4eb28d',
+    participants: [{ id: '998425f3-d7ab-44c4-ba59-8d8a7d4eb28d' }]
+  });
 
   const handleInputChange = useCallback(event => {
     event.persist();
-    setUserValue(prevUserEntity => ({
-      ...prevUserEntity,
+    setFormData(prevFormData => ({
+      ...prevFormData,
       [event.target.id]: event.target.value
     }));
-  }, [userEntity]);
+  }, [formData]);
 
   const handleCancel = useCallback(() => {
     dispatch(closeModalAction());
   }, []);
 
+  const handleEventCreate = () => {
+    dispatch(loadCreateEvent(formData));
+  };
+
   return (
     <>
       <DialogTitle id="form-dialog-title">{ title }</DialogTitle>
       <DialogContent>
-        {/* <DialogContentText>
-          { contentText }
-        </DialogContentText> */}
         <TextField
-          margin="dense"
           id="title"
           label="Title"
           fullWidth
           onChange={handleInputChange}
-          value={userEntity.title}
+          value={formData.title}
         />
         <TextField
-          margin="dense"
           id="location"
           label="Location"
           fullWidth
           onChange={handleInputChange}
-          value={userEntity.location}
+          value={formData.location}
         />
         <TextField
           type="number"
-          margin="dense"
           id="duration"
           label="Duration"
           fullWidth
           onChange={handleInputChange}
-          value={userEntity.duration}
+          value={formData.duration}
         />
         <TextField
-          id="datetime-local"
+          type="number"
+          id="radius"
+          label="Radius"
+          fullWidth
+          onChange={handleInputChange}
+          value={formData.radius}
+        />
+        <TextField
+          id="eventDate"
           label="Time"
           type="datetime-local"
-          defaultValue="2017-05-24T10:30"
           InputLabelProps={{
             shrink: true
           }}
+          onChange={handleInputChange}
+          value={formData.eventDate}
         />
         <TextField
           multiline
           rowsMax={4}
-          margin="dense"
-          id="desc"
+          id="description"
           label="Description"
           fullWidth
           onChange={handleInputChange}
-          value={userEntity.description}
+          value={formData.description}
         />
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={() => console.log('save')}>
-          Save
+        <Button onClick={handleEventCreate}>
+          Create
         </Button>
         <Button onClick={handleCancel}>
           Cancel
@@ -93,19 +108,7 @@ const EventForm = ({ title, contentData }) => {
 };
 
 EventForm.propTypes = {
-  title: PropTypes.string.isRequired,
-  contentData: PropTypes.arrayOf(PropTypes.object)
-};
-
-EventForm.defaultProps = {
-  contentData: {
-    user: {
-      name: '',
-      surname: '',
-      desc: ''
-    },
-    id: -1
-  }
+  title: PropTypes.string.isRequired
 };
 
 export default EventForm;

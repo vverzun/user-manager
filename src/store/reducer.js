@@ -58,6 +58,13 @@ export default (state, { type, payload }) => {
         isLoading: false
       };
 
+    case actionTypes.POST_EVENT:
+      return {
+        ...state,
+        userCreatedEvents: [...state.userCreatedEvents, payload.event],
+        isLoading: false
+      };
+
     default: return state;
   }
 };

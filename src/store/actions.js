@@ -43,6 +43,13 @@ const deleteEventAction = event => ({
   }
 });
 
+const postEventAction = event => ({
+  type: actionTypes.POST_EVENT,
+  payload: {
+    event
+  }
+});
+
 const getUserCreatedEventsAction = data => ({
   type: actionTypes.GET_USER_CREATED_EVENTS,
   payload: {
@@ -64,4 +71,8 @@ export const loadUserCreatedEvents = id => async dispatch => {
 
 export const deleteEvent = id => async dispatch => {
   asyncAction(dispatch, eventService.deleteEvent, [id], deleteEventAction);
+};
+
+export const loadCreateEvent = event => async dispatch => {
+  asyncAction(dispatch, eventService.postEvent, [event], postEventAction);
 };
