@@ -22,6 +22,10 @@ const Layout = ({ children }) => {
     history.push(route);
   }, []);
 
+  const handleLoginRedirect = () => {
+    history.push('/login');
+  };
+
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -66,7 +70,7 @@ const Layout = ({ children }) => {
             Partynder
           </Typography>
 
-          <Button color="inherit">Login</Button>
+          <Button color="inherit" onClick={handleLoginRedirect}>Login</Button>
         </Toolbar>
       </AppBar>
 

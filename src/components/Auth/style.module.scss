@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin: 25px;
+  padding: 25px;
+
+  .header {
+    margin-bottom: 25px;
+  }
+
+  .input {
+    margin-bottom: 25px;
+  }
+
+  .button {
+    margin-bottom: 10px;
+  }
+
+  .link {
+    color: #000000;
+    font-family: 'Sono';
+    font-size: 14px;
+  }
+}
