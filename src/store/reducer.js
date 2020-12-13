@@ -56,6 +56,12 @@ export default (state, { type, payload }) => {
         user: payload.user
       };
 
+    case actionTypes.POST_USER:
+      return {
+        ...state,
+        user: payload.user
+      };
+
     case actionTypes.GET_USER_CREATED_EVENTS:
       return {
         ...state,

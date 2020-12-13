@@ -7,7 +7,7 @@ import style from './style.module.scss';
 
 const Login = () => {
   const handleLogin = () => {
-    console.log('handle login');
+    console.log('login');
   };
 
   return (
