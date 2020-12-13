@@ -4,11 +4,13 @@ import Alert from '@material-ui/lab/Alert';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
+
 import { closeErrorAction } from '../../store/actions';
 import style from './style.module.scss';
 
 const ErrorAlert = () => {
   const error = useSelector(state => state.error);
+  console.log('error', error);
 
   const dispatch = useDispatch();
 

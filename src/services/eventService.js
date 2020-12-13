@@ -20,12 +20,12 @@ const eventService = {
   },
 
   deleteEvent: async id => {
-    const response = await callWebApi({
+    await callWebApi({
       endpoint: `/events/${id}`,
       type: 'DELETE'
     });
 
-    return response.json();
+    return '';
   },
 
   getUserCreatedEvents: async id => {

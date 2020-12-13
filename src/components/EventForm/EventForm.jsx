@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +11,7 @@ import { loadCreateEvent, closeModalAction } from '../../store/actions';
 
 const EventForm = ({ title }) => {
   const dispatch = useDispatch();
+  const userId = useSelector(state => state.MOCK_USER_ID);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -20,8 +21,8 @@ const EventForm = ({ title }) => {
     description: '',
     duration: '',
     radius: '',
-    createdBy: '998425f3-d7ab-44c4-ba59-8d8a7d4eb28d',
-    participants: [{ id: '998425f3-d7ab-44c4-ba59-8d8a7d4eb28d' }]
+    createdBy: { id: userId },
+    participants: [{ id: userId }]
   });
 
   const handleInputChange = useCallback(event => {

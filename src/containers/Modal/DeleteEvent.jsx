@@ -7,17 +7,16 @@ import { useDispatch } from 'react-redux';
 
 import { deleteEvent as deleteEventAction, closeModalAction } from '../../store/actions';
 
-const DeleteEvent = ({ data: { eventId } }) => {
-  console.log('eventId', eventId);
+const MOCK_USER_ID = 'fedab535-56ad-4c12-9b4e-c409e8233f8d';
 
+const DeleteEvent = ({ data: { eventId } }) => {
   const dispatch = useDispatch();
   const handleCloseModal = () => {
     dispatch(closeModalAction());
   };
 
   const handleConfirm = () => {
-    console.log('here');
-    dispatch(deleteEventAction(eventId));
+    dispatch(deleteEventAction(eventId, MOCK_USER_ID));
     dispatch(closeModalAction());
   };
 
