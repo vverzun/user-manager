@@ -29,10 +29,21 @@ const getEventAction = event => ({
   }
 });
 
+const postEventAction = event => ({
+  type: actionTypes.POST_EVENT,
+  payload: {
+    event
+  }
+});
+
 export const loadAllEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getAllEvents, [], getAllEventsAction);
 };
 
 export const loadEvent = id => async dispatch => {
   asyncAction(dispatch, eventService.getEvent, [id], getEventAction);
+};
+
+export const loadCreateEvent = event => async dispatch => {
+  asyncAction(dispatch, eventService.postEvent, [event], postEventAction);
 };

@@ -5,7 +5,8 @@ const actionTypes = {
   CLOSE_MODAL: 'CLOSE_MODAL',
   CLOSE_ERROR: 'CLOSE_ERROR',
   GET_ALL_EVENTS: 'GET_ALL_EVENTS',
-  GET_EVENT: 'GET_EVENT'
+  GET_EVENT: 'GET_EVENT',
+  POST_EVENT: 'POST_EVENT'
 };
 
 export default actionTypes;
