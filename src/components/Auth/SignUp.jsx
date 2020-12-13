@@ -64,6 +64,7 @@ const SignUp = () => {
         <TextField
           id="password"
           label="Password"
+          type="password"
           variant="outlined"
           className={style.input}
           onChange={handleInputChange}

@@ -45,6 +45,7 @@ const Login = () => {
         />
         <TextField
           id="password"
+          type="password"
           label="Password"
           variant="outlined"
           className={style.input}
