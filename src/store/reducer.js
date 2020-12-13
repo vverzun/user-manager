@@ -37,6 +37,12 @@ export default (state = initialState, action) => {
         isModalOpened: false
       };
 
+    case actionTypes.CLOSE_ERROR:
+      return {
+        ...state,
+        error: null
+      };
+
     case actionTypes.GET_ALL_EVENTS:
       return {
         ...state,

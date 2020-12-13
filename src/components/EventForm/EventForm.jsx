@@ -8,7 +8,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 
 import { closeModalAction } from '../../store/actions';
-import { addNewUser, updateExistingUser } from '../../containers/Manager/actions';
 
 const EventForm = ({ title, contentData }) => {
   const { user, id } = contentData;
@@ -27,15 +26,6 @@ const EventForm = ({ title, contentData }) => {
   const handleCancel = useCallback(() => {
     dispatch(closeModalAction());
   }, []);
-
-  const handleSave = useCallback(() => {
-    dispatch(closeModalAction());
-    dispatch(
-      id === -1
-        ? addNewUser(userEntity)
-        : updateExistingUser(id, userEntity)
-    );
-  }, [userEntity]);
 
   return (
     <>
@@ -91,7 +81,7 @@ const EventForm = ({ title, contentData }) => {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={handleSave}>
+        <Button onClick={() => console.log('save')}>
           Save
         </Button>
         <Button onClick={handleCancel}>

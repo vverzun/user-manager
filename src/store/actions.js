@@ -10,6 +10,10 @@ export const closeModalAction = () => ({
   type: actionTypes.CLOSE_MODAL
 });
 
+export const closeErrorAction = () => ({
+  type: actionTypes.CLOSE_ERROR
+});
+
 const getAllEventsAction = allEvents => ({
   type: actionTypes.GET_ALL_EVENTS,
   payload: {

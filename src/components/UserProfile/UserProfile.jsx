@@ -11,7 +11,7 @@ import userData from '../../mockData/userProfile';
 import Layout from '../../containers/Layout/Layout';
 import BackButton from '../common/BackButton/BackButton';
 
-const Header = () => {
+const UserProfile = () => {
   const dispatch = useDispatch();
 
   const handleModalOpen = useCallback(() => {
@@ -62,4 +62,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default UserProfile;
