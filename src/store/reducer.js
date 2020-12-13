@@ -1,8 +1,7 @@
 import actionTypes from './actionTypes';
 
-export default (state, action) => {
-  console.log('action', action);
-  switch (action.type) {
+export default (state, { type, payload }) => {
+  switch (type) {
     case actionTypes.ASYNC_ACTION_PENDING:
       return {
         ...state,
@@ -13,18 +12,22 @@ export default (state, action) => {
       return {
         ...state,
         isLoading: false,
-        error: action.payload.error
+        error: payload.error
       };
 
     case actionTypes.OPEN_MODAL:
+      const { data, modalContentType } = payload;
       return {
         ...state,
+        modalContentType: payload.modalContentType,
+        modalData: data,
         isModalOpened: true
       };
 
     case actionTypes.CLOSE_MODAL:
       return {
         ...state,
+        modalContentType: null,
         isModalOpened: false
       };
 
@@ -37,21 +40,21 @@ export default (state, action) => {
     case actionTypes.GET_ALL_EVENTS:
       return {
         ...state,
-        allEvents: action.payload.allEvents,
+        allEvents: payload.allEvents,
         isLoading: false
       };
 
     case actionTypes.GET_EVENT:
       return {
         ...state,
-        event: action.payload.event,
+        event: payload.event,
         isLoading: false
       };
 
     case actionTypes.GET_USER_CREATED_EVENTS:
       return {
         ...state,
-        userCreatedEvents: action.payload.userCreatedEvents,
+        userCreatedEvents: payload.userCreatedEvents,
         isLoading: false
       };
 

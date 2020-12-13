@@ -57,10 +57,19 @@
   
   .eventCard {
     width: 100%;
+    position: relative;
     
     &:not(:last-of-type) {
       margin-bottom: 25px;
     }
+  }
+
+  .deleteIcon {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 50px;
   }
 }
 

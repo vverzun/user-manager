@@ -19,6 +19,8 @@ const initialState = {
   userCreatedEvents: [],
   isModalOpened: false,
 
+  modalContentType: null,
+
   isLoading: false,
   error: null
 };

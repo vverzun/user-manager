@@ -11,11 +11,13 @@ import {
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Skeleton from '@material-ui/lab/Skeleton';
+import { default as DeleteIcon } from '@material-ui/icons/Close';
 
-import { loadUserCreatedEvents } from '../../store/actions';
+import { loadUserCreatedEvents, openModalAction } from '../../store/actions';
 import BackButton from '../common/BackButton/BackButton';
 import Layout from '../../containers/Layout/Layout';
 import style from './style.module.scss';
+import { MODAL_TYPES } from '../../constants/modal';
 
 const TRANSITION_TIME = 350;
 
@@ -28,6 +30,13 @@ const UserEvents = () => {
   }, []);
 
   const dispatch = useDispatch();
+  const handleModalOpen = useCallback(eventId => {
+    dispatch(openModalAction({
+      modalContentType: MODAL_TYPES.DELETE_EVENT,
+      data: { eventId }
+    }));
+  }, []);
+
   const userCreatedEvents = useSelector(state => state.userCreatedEvents);
   const isLoading = useSelector(state => state.isLoading);
 
@@ -61,7 +70,7 @@ const UserEvents = () => {
         <Card
           key={id}
           className={style.eventCard}
-          onClick={handleViewEventDetails(id)}
+          // onClick={handleViewEventDetails(id)}
           elevation={3}
         >
           <CardContent>
@@ -72,6 +81,8 @@ const UserEvents = () => {
               {location}
             </Typography>
             <Typography>{moment(date).format('MM:HH DD MMM')}</Typography>
+
+            <DeleteIcon className={style.deleteIcon} onClick={() => handleModalOpen(id)} />
           </CardContent>
         </Card>
       </Grow>
@@ -81,6 +92,10 @@ const UserEvents = () => {
   return (
     <Layout>
       <BackButton />
+
+      <Typography variant="h5" align="center">
+        Events by me
+      </Typography>
 
       <Box className={style.eventsWrapper}>
         {renderEvents()}

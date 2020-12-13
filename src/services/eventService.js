@@ -19,6 +19,15 @@ const eventService = {
     return response.json();
   },
 
+  deleteEvent: async id => {
+    const response = await callWebApi({
+      endpoint: `/events/${id}`,
+      type: 'DELETE'
+    });
+
+    return response.json();
+  },
+
   getUserCreatedEvents: async id => {
     const response = await callWebApi({
       endpoint: `/events/search/findAllByUserId?userId=${id}`,

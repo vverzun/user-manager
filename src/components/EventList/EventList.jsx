@@ -81,6 +81,10 @@ const EventList = () => {
       <Box className={style.eventList}>
         <BackButton />
 
+        <Typography variant="h5" align="center">
+          Events list
+        </Typography>
+
         <Box className={style.eventsWrapper}>
           {renderEvents()}
         </Box>

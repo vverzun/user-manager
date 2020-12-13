@@ -3,12 +3,19 @@ import actionTypes from './actionTypes';
 import asyncAction from '../helpers/asyncActionHelper';
 import eventService from '../services/eventService';
 
-export const openModalAction = () => ({
-  type: actionTypes.OPEN_MODAL
+export const openModalAction = ({ modalContentType, data }) => ({
+  type: actionTypes.OPEN_MODAL,
+  payload: {
+    modalContentType,
+    data
+  }
 });
 
-export const closeModalAction = () => ({
-  type: actionTypes.CLOSE_MODAL
+export const closeModalAction = modalContentType => ({
+  type: actionTypes.CLOSE_MODAL,
+  payload: {
+    modalContentType
+  }
 });
 
 export const closeErrorAction = () => ({
@@ -24,6 +31,13 @@ const getAllEventsAction = data => ({
 
 const getEventAction = event => ({
   type: actionTypes.GET_EVENT,
+  payload: {
+    event
+  }
+});
+
+const deleteEventAction = event => ({
+  type: actionTypes.DELETE_EVENT,
   payload: {
     event
   }
@@ -46,4 +60,8 @@ export const loadEvent = id => async dispatch => {
 
 export const loadUserCreatedEvents = id => async dispatch => {
   asyncAction(dispatch, eventService.getUserCreatedEvents, [id], getUserCreatedEventsAction);
+};
+
+export const deleteEvent = id => async dispatch => {
+  asyncAction(dispatch, eventService.deleteEvent, [id], deleteEventAction);
 };
