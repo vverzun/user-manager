@@ -1,6 +1,7 @@
 import actionTypes from './actionTypes';
 
 export default (state, action) => {
+  console.log('action', action);
   switch (action.type) {
     case actionTypes.ASYNC_ACTION_PENDING:
       return {
@@ -44,6 +45,13 @@ export default (state, action) => {
       return {
         ...state,
         event: action.payload.event,
+        isLoading: false
+      };
+
+    case actionTypes.GET_USER_CREATED_EVENTS:
+      return {
+        ...state,
+        userCreatedEvents: action.payload.userCreatedEvents,
         isLoading: false
       };
 

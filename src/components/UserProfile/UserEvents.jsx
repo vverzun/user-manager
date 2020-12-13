@@ -1,27 +1,39 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import moment from 'moment';
+import _ from 'lodash';
 import {
-  Box,
   Typography,
-  Fade
+  Card,
+  CardContent,
+  Box,
+  Grow
 } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import Skeleton from '@material-ui/lab/Skeleton';
 
+import { loadUserCreatedEvents } from '../../store/actions';
 import BackButton from '../common/BackButton/BackButton';
 import Layout from '../../containers/Layout/Layout';
 import style from './style.module.scss';
 
 const TRANSITION_TIME = 350;
 
-const MyEvents = () => {
+const MOCK_USER_ID = 'fedab535-56ad-4c12-9b4e-c409e8233f8d';
+
+const UserEvents = () => {
   const history = useHistory();
   const handleViewEventDetails = useCallback(id => () => {
     history.push(`/event/${id}`);
   }, []);
 
   const dispatch = useDispatch();
-  const allEvents = useSelector(state => state.allEvents);
+  const userCreatedEvents = useSelector(state => state.userCreatedEvents);
   const isLoading = useSelector(state => state.isLoading);
+
+  useEffect(() => {
+    dispatch(loadUserCreatedEvents(MOCK_USER_ID));
+  }, []);
 
   const renderEvents = useCallback(() => {
     if (isLoading) {
@@ -40,11 +52,11 @@ const MyEvents = () => {
       );
     }
 
-    if (_.isEmpty(allEvents)) {
+    if (_.isEmpty(userCreatedEvents)) {
       return <Typography>There are no events right now</Typography>;
     }
 
-    return _.map(allEvents, ({ title, date, location, id }, index) => (
+    return _.map(userCreatedEvents, ({ title, date, location, id }, index) => (
       <Grow in timeout={TRANSITION_TIME * index + TRANSITION_TIME} key={id}>
         <Card
           key={id}
@@ -64,15 +76,17 @@ const MyEvents = () => {
         </Card>
       </Grow>
     ));
-  }, [allEvents, isLoading]);
+  }, [userCreatedEvents, isLoading]);
 
   return (
     <Layout>
       <BackButton />
 
-      My events
+      <Box className={style.eventsWrapper}>
+        {renderEvents()}
+      </Box>
     </Layout>
   );
 };
 
-export default MyEvents;
+export default UserEvents;

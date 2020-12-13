@@ -16,7 +16,7 @@ const initialState = {
     date: '',
     participants: []
   },
-
+  userCreatedEvents: [],
   isModalOpened: false,
 
   isLoading: false,

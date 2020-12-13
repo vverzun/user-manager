@@ -56,9 +56,9 @@ const UserProfile = () => {
         </Box>
         <Divider />
 
-        <Box className={style.myEventsWrapper} onClick={redirect('/myEvents')}>
+        <Box className={style.myEventsWrapper} onClick={redirect('/userEvents')}>
           <Typography variant="h6">
-            Browse events near you
+            My events
           </Typography>
           <ArrowForwardIcon className={style.myEventsIcon} />
         </Box>

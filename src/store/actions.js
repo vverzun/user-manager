@@ -29,10 +29,21 @@ const getEventAction = event => ({
   }
 });
 
+const getUserCreatedEventsAction = data => ({
+  type: actionTypes.GET_USER_CREATED_EVENTS,
+  payload: {
+    userCreatedEvents: data._embedded.events
+  }
+});
+
 export const loadAllEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getAllEvents, [], getAllEventsAction);
 };
 
 export const loadEvent = id => async dispatch => {
   asyncAction(dispatch, eventService.getEvent, [id], getEventAction);
+};
+
+export const loadUserCreatedEvents = id => async dispatch => {
+  asyncAction(dispatch, eventService.getUserCreatedEvents, [id], getUserCreatedEventsAction);
 };
