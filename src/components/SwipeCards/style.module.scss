@@ -1,0 +1,35 @@
+.swipeCards {
+  height: 100vh;
+  background: linear-gradient(#fd297b, #ff655b);
+
+  .swipeCardWrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 25px 25px;
+    height: 400px;
+    
+    .eventCard {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      width: 300px;
+      height: 300px;
+      
+      &:not(:last-of-type) {
+        margin-bottom: 25px;
+      }
+    }
+  }
+
+  .skeletonCard {
+    border-radius: 5px;
+    margin-bottom: 25px;
+  }
+
+  .infoWrapper {
+    margin-top: 50px;
+  }
+}

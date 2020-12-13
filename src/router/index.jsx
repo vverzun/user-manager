@@ -12,6 +12,7 @@ import Event from '../components/Event/Event';
 import UserProfile from '../components/UserProfile/UserProfile';
 import UserEvents from '../components/UserProfile/UserEvents';
 import SignUp from '../components/Auth/SignUp';
+import SwipeCards from '../components/SwipeCards/SwipeCards';
 
 const Router = () => (
   <BrowserRouter>
@@ -21,6 +22,8 @@ const Router = () => (
       <Route exact path="/profile" component={UserProfile} />
       <Route exact path="/event/:id" component={Event} />
       <Route exact path="/userEvents" component={UserEvents} />
+      <Route exact path="/swipeCards" component={SwipeCards} />
+
       <Route exact path="/login" component={Login} />
       <Route exact path="/sign-up" component={SignUp} />
       <Route component={HomePage} />
