@@ -1,37 +1,17 @@
-.layout {
-  .menuIcon {
-    color: #ffffff;
-  }
+.toolbar {
+  display: flex;
+  flex-flow: row;
+  padding: 10px;
+  background: #424242;
 
-  .toolbar {
-    padding: 0;
-    background: #3a3a3a;
-  }
-
-  .menuButton {
-    padding-right: 0;
-  }
-
-  .headerTitle {
-    flex-grow: 1;
-  }
-
-  .homeContentWrapper {
-    margin-top: 25px;
-  }
-
-  .mainHeading {
-    text-align: center;
-  }
-
-  .browseWrapper {
+  .menu {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    flex-grow: 1;
+
+    .icon {
+      color: #ffffff;
+    }
   }
 
-  .browseIcon {
-    font-size: 2rem;
-  }
 }
