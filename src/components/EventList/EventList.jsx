@@ -14,7 +14,6 @@ import { loadEvents } from '../../store/events/actions';
 
 import Layout from '../../containers/Layout/Layout';
 import style from './style.module.scss';
-import eventList from '../../mockData/eventList';
 import BackButton from '../common/BackButton/BackButton';
 
 const TRANSITION_TIME = 350;
@@ -26,8 +25,10 @@ const EventList = () => {
   }, []);
 
   const dispatch = useDispatch();
-  const events = useSelector(state => state.events);
-  console.log('events', events);
+  const events = useSelector(state => state.events.events);
+  const isLoading = useSelector(state => state.events.isLoading);
+
+  const eventList = _.get(events, '_embedded.events');
 
   useEffect(() => {
     dispatch(loadEvents());
