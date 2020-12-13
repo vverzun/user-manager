@@ -17,6 +17,16 @@ const eventService = {
     });
 
     return response.json();
+  },
+
+  postEvent: async event => {
+    const response = await callWebApi({
+      endpoint: '/events',
+      type: 'POST',
+      request: event
+    });
+
+    return response.json();
   }
 };
 
