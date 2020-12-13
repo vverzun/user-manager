@@ -1,7 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import _ from 'lodash';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Typography,
   Card,
@@ -9,6 +10,7 @@ import {
   Box,
   Grow
 } from '@material-ui/core';
+import { loadEvents } from '../../store/events/actions';
 
 import Layout from '../../containers/Layout/Layout';
 import style from './style.module.scss';
@@ -21,6 +23,14 @@ const EventList = () => {
   const history = useHistory();
   const handleViewEventDetails = useCallback(id => () => {
     history.push(`/event/${id}`);
+  }, []);
+
+  const dispatch = useDispatch();
+  const events = useSelector(state => state.events);
+  console.log('events', events);
+
+  useEffect(() => {
+    dispatch(loadEvents());
   }, []);
 
   const renderEvents = useCallback(() => (

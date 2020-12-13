@@ -8,6 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import userManagerReducer from './containers/Manager/reducer';
 import modalReducer from './containers/Modal/reducer';
+import eventsReducer from './store/events/reducer';
 
 const initialState = {};
 
@@ -17,7 +18,8 @@ const middleware = composeWithDevTools(
 
 const rootReducer = combineReducers({
   userManager: userManagerReducer,
-  modal: modalReducer
+  modal: modalReducer,
+  events: eventsReducer
 });
 
 const store = createStore(
