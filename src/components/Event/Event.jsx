@@ -24,9 +24,10 @@ const Event = () => {
   return (
     <Layout>
       <Card className={style.wrapper}>
-        <Typography variant="h3">
+        <Typography variant="h3" className={style.eventTitle}>
           {title}
         </Typography>
+
         <Box className={style.dateAndTimeWrapper}>
           <Typography>
             Date:
@@ -39,6 +40,7 @@ const Event = () => {
             {location}
           </Typography>
         </Box>
+
         <Box className={style.infoWrapper}>
           <Box className={style.image}>
             <img src={party} alt="party" />
@@ -59,6 +61,7 @@ const Event = () => {
             </Box>
           </Box>
         </Box>
+
         <Box className={style.actions}>
           <Button variant="contained">Join</Button>
         </Box>
