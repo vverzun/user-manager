@@ -10,6 +10,7 @@ import style from './style.module.scss';
 import userData from '../../mockData/userProfile';
 import Layout from '../../containers/Layout/Layout';
 import BackButton from '../common/BackButton/BackButton';
+import { MODAL_TYPES } from '../../constants/modal';
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const UserProfile = () => {
   }, []);
 
   const handleModalOpen = useCallback(() => {
-    dispatch(openModalAction());
+    dispatch(openModalAction({ modalContentType: MODAL_TYPES.CREATE_EVENT }));
   }, []);
 
   const { firstName, lastName, eventsVisited, eventsCreated } = userData;
@@ -71,7 +72,6 @@ const UserProfile = () => {
             Add new Event
           </Button>
         </Box>
-
       </Box>
     </Layout>
   );

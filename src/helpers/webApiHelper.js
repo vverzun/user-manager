@@ -32,11 +32,13 @@ const getFetchArgs = args => {
 const throwIfResponseFailed = async res => {
   if (!res.ok) {
     let parsedException = 'Something went wrong with request!';
+
     try {
       parsedException = await res.json();
     } catch (err) {
       // handleError
     }
+
     throw parsedException;
   }
 };
@@ -46,7 +48,9 @@ const callWebApi = async args => {
     getFetchUrl(args),
     getFetchArgs(args)
   );
+
   await throwIfResponseFailed(res);
+
   return res;
 };
 

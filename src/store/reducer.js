@@ -65,6 +65,12 @@ export default (state, { type, payload }) => {
         isLoading: false
       };
 
+    case actionTypes.DELETE_EVENT:
+      return {
+        ...state,
+        isLoading: false
+      };
+
     default: return state;
   }
 };

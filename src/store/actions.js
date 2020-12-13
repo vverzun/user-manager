@@ -2,6 +2,7 @@
 import actionTypes from './actionTypes';
 import asyncAction from '../helpers/asyncActionHelper';
 import eventService from '../services/eventService';
+import store from '../configureStore';
 
 export const openModalAction = ({ modalContentType, data }) => ({
   type: actionTypes.OPEN_MODAL,
@@ -69,10 +70,19 @@ export const loadUserCreatedEvents = id => async dispatch => {
   asyncAction(dispatch, eventService.getUserCreatedEvents, [id], getUserCreatedEventsAction);
 };
 
-export const deleteEvent = id => async dispatch => {
-  asyncAction(dispatch, eventService.deleteEvent, [id], deleteEventAction);
+export const deleteEvent = eventId => async dispatch => {
+  asyncAction(dispatch, eventService.deleteEvent, [eventId], deleteEventAction)
+    .then(() => {
+      const userId = store.getState().MOCK_USER_ID;
+      dispatch(loadUserCreatedEvents(userId))
+        .then(() => {
+          dispatch(closeModalAction());
+        });
+    });
 };
 
 export const loadCreateEvent = event => async dispatch => {
   asyncAction(dispatch, eventService.postEvent, [event], postEventAction);
+
+  dispatch(closeModalAction());
 };
