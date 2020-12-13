@@ -27,7 +27,7 @@ const SignUp = () => {
   const history = useHistory();
 
   const handleSignUp = () => {
-    dispatch(loadCreateUser({ userAuthDTO: formData }, history));
+    dispatch(loadCreateUser(formData, history));
   };
 
   return (

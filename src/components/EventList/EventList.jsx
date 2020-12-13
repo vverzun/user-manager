@@ -76,7 +76,7 @@ const EventList = () => {
             key={index}
             className={style.skeletonCard}
             variant="rect"
-            width={350}
+            width={325}
             height={130}
           />
         ))
