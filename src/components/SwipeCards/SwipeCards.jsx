@@ -45,11 +45,11 @@ const SwipeCards = () => {
   const [characters, setCharacters] = useState(db);
   const [lastDirection, setLastDirection] = useState();
 
-  const childRefs = useMemo(() => Array(db.length).fill(0).map(i => React.createRef()), []);
-
   const dispatch = useDispatch();
-  const allEvents = useSelector(state => state.allEvents);
+  const events = useSelector(state => state.allEvents);
   const isLoading = useSelector(state => state.isLoading);
+
+  const childRefs = useMemo(() => events && Array(events.length).fill(0).map(i => React.createRef()), []);
 
   useEffect(() => {
     dispatch(loadAllEvents());
@@ -57,6 +57,8 @@ const SwipeCards = () => {
 
   const onSwipe = direction => {
     console.log(`You swiped: ${direction}`);
+
+    setLastDirection(direction);
   };
 
   const onCardLeftScreen = myIdentifier => {
@@ -75,40 +77,64 @@ const SwipeCards = () => {
       );
     }
 
-    // if (_.isEmpty(allEvents)) {
-    //   return <Typography>There are no events right now</Typography>;
-    // }
+    if (_.isEmpty(events)) {
+      return <Typography>There are no events right now</Typography>;
+    }
 
     return (
-      <TinderCard
-        onSwipe={onSwipe}
-        onCardLeftScreen={() => onCardLeftScreen('fooBar')}
-        preventSwipe={['up', 'down']}
-      >
-        <Card
-          className={style.eventCard}
-          elevation={5}
-        >
-          <CardContent>
-            <Typography align="center" variant="h6">title</Typography>
-            <Typography align="center">
-              Place:
-              {' '}
-              location
-            </Typography>
-            <Typography align="center">
-              Type:
-              {' '}
-              location
-            </Typography>
-            <Typography align="center">
-              {moment().format('MM:HH DD MMM')}
-            </Typography>
-          </CardContent>
-        </Card>
-      </TinderCard>
+      _.map(events, event => {
+        console.log('event', event);
+        const { title, location, eventDate, eventType, id, createdBy, participants } = event;
+        return (
+
+          <TinderCard
+            key={id}
+            onSwipe={onSwipe}
+            onCardLeftScreen={() => onCardLeftScreen('fooBar')}
+            preventSwipe={['up', 'down']}
+            className={style.tinderCard}
+          >
+            <Card
+              className={style.eventCard}
+              elevation={5}
+            >
+              <CardContent>
+                <Typography align="center" variant="h4">{title}</Typography>
+                <Typography align="center">
+                  Place:
+                  {' '}
+                  {location}
+                </Typography>
+                <Typography align="center">
+                  Type:
+                  {' '}
+                  {eventType}
+                </Typography>
+                <Typography align="center">
+                  {moment(eventDate).format('MM:HH DD MMM')}
+                </Typography>
+
+                <Typography className={style.hostInfo} align="center">
+                  Host:
+                  {' '}
+                  {createdBy.firstName}
+                  {' '}
+                  {createdBy.lastName}
+                </Typography>
+                <Typography align="center">
+                  Going:
+                  {' '}
+                  {participants.length}
+                  {' '}
+                  people
+                </Typography>
+              </CardContent>
+            </Card>
+          </TinderCard>
+        );
+      })
     );
-  }, [allEvents, isLoading]);
+  }, [events, isLoading]);
 
   return (
     <Layout>
@@ -118,6 +144,19 @@ const SwipeCards = () => {
         <Box className={style.swipeCardWrapper}>
           {renderTinderCards()}
         </Box>
+
+        {lastDirection
+        && (
+          <Fade in timeout={{ enter: 500 }}>
+            <Box className={style.goingInfo}>
+              <Typography variant="h5" align="center">
+                You are
+                {' '}
+                {lastDirection === 'right' ? 'Going!' : 'not going'}
+              </Typography>
+            </Box>
+          </Fade>
+        )}
 
         <Fade in timeout={{ enter: 500 }}>
           <Box className={style.infoWrapper}>
