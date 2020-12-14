@@ -17,7 +17,9 @@ const PARTY_TYPES = ['DRINKING', 'SPORTS', 'MOVIES', 'ACTION', 'READING', 'BIBLE
 
 const EventForm = ({ title, data }) => {
   const dispatch = useDispatch();
-  data.partyType = data.eventType;
+  if (data) {
+    data.partyType = data.eventType;
+  }
 
   const [formData, setFormData] = useState(data || {
     title: '',

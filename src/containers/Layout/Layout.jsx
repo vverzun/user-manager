@@ -87,7 +87,9 @@ const Layout = ({ children }) => {
           </Button>
         </Toolbar>
       </AppBar>
-      {children}
+      <Box>
+        {children}
+      </Box>
       <ErrorAlert />
     </Box>
   );

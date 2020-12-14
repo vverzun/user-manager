@@ -22,7 +22,7 @@ const HomePage = () => {
         <Box className={style.homeContentWrapper}>
           <Fade in timeout={{ enter: 500 }}>
             <Typography variant="h4" className={style.mainHeading}>
-              Welcome to Partynder!
+              WELCOME TO PARTYNDER
             </Typography>
           </Fade>
         </Box>
@@ -30,7 +30,7 @@ const HomePage = () => {
         <Fade in timeout={{ enter: 500 }}>
           <Box className={style.browseWrapper} onClick={redirect('/events')}>
             <Typography variant="h6">
-              Browse events near you
+              Browse events
             </Typography>
             <ArrowForwardIcon className={style.browseIcon} />
           </Box>
@@ -39,8 +39,9 @@ const HomePage = () => {
         <Fade in timeout={{ enter: 500 }}>
           <Box className={style.browseWrapper} onClick={redirect('/swipeCards')}>
             <Typography variant="h6">
-              PARTYNDER!
+              PARTYNDER
             </Typography>
+            <ArrowForwardIcon className={style.browseIcon} />
           </Box>
         </Fade>
       </Box>

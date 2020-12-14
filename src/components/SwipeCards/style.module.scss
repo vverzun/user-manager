@@ -1,6 +1,6 @@
 .swipeCards {
-  height: 100vh;
-  background: linear-gradient(#fd297b, #ff655b);
+  // height: 100vh;
+  // background: linear-gradient(#fd297b, #ff655b);
 
   .swipeCardWrapper {
     display: flex;
@@ -9,7 +9,7 @@
     justify-content: center;
     padding: 10px 25px 25px;
     height: 400px;
-    
+
     .tinderCard {
       position: absolute;
 
@@ -25,7 +25,7 @@
       padding: 25px;
       width: 300px;
       height: 300px;
-      
+
       &:not(:last-of-type) {
         margin-bottom: 25px;
       }
