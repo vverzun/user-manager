@@ -96,6 +96,18 @@ export default (state, { type, payload }) => {
         isLoading: false
       };
 
+    case actionTypes.ADD_EVENT_TO_GOING:
+      return {
+        ...state,
+        isLoading: false
+      };
+
+    case actionTypes.REMOVE_EVENT_FROM_GOING:
+      return {
+        ...state,
+        isLoading: false
+      };
+
     default: return state;
   }
 };

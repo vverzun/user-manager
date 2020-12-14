@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import _ from 'lodash';
 import moment from 'moment';
-import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Typography,
@@ -10,53 +9,35 @@ import {
   Box,
   Fade
 } from '@material-ui/core';
-import Skeleton from '@material-ui/lab/Skeleton';
 import TinderCard from 'react-tinder-card';
 
 import Layout from '../../containers/Layout/Layout';
-import { loadAllEvents } from '../../store/actions';
+import { loadAllEvents, addEventToGoing, removeEventFromGoing } from '../../store/actions';
 import style from './style.module.scss';
 import BackButton from '../common/BackButton/BackButton';
 
-const db = [
-  {
-    name: 'Richard Hendricks',
-    url: './img/richard.jpg'
-  },
-  {
-    name: 'Erlich Bachman',
-    url: './img/erlich.jpg'
-  },
-  {
-    name: 'Monica Hall',
-    url: './img/monica.jpg'
-  },
-  {
-    name: 'Jared Dunn',
-    url: './img/jared.jpg'
-  },
-  {
-    name: 'Dinesh Chugtai',
-    url: './img/dinesh.jpg'
-  }
-];
-
 const SwipeCards = () => {
-  const [characters, setCharacters] = useState(db);
+  const [characters, setCharacters] = useState();
   const [lastDirection, setLastDirection] = useState();
 
-  const childRefs = useMemo(() => Array(db.length).fill(0).map(i => React.createRef()), []);
-
   const dispatch = useDispatch();
-  const allEvents = useSelector(state => state.allEvents);
+  const events = useSelector(state => state.allEvents);
   const isLoading = useSelector(state => state.isLoading);
+
+  const childRefs = useMemo(() => events && Array(events.length).fill(0).map(i => React.createRef()), []);
 
   useEffect(() => {
     dispatch(loadAllEvents());
   }, []);
 
-  const onSwipe = direction => {
-    console.log(`You swiped: ${direction}`);
+  const onSwipe = (direction, id) => {
+    if (direction === 'right') {
+      dispatch(addEventToGoing(id));
+    } else if (direction === 'left') {
+      dispatch(removeEventFromGoing(id));
+    }
+
+    setLastDirection(direction);
   };
 
   const onCardLeftScreen = myIdentifier => {
@@ -64,51 +45,62 @@ const SwipeCards = () => {
   };
 
   const renderTinderCards = useCallback(() => {
-    if (isLoading) {
-      return (
-        <Skeleton
-          className={style.skeletonCard}
-          variant="rect"
-          width={300}
-          height={300}
-        />
-      );
+    if (_.isEmpty(events)) {
+      return <Typography>There are no events right now</Typography>;
     }
 
-    // if (_.isEmpty(allEvents)) {
-    //   return <Typography>There are no events right now</Typography>;
-    // }
-
     return (
-      <TinderCard
-        onSwipe={onSwipe}
-        onCardLeftScreen={() => onCardLeftScreen('fooBar')}
-        preventSwipe={['up', 'down']}
-      >
-        <Card
-          className={style.eventCard}
-          elevation={5}
-        >
-          <CardContent>
-            <Typography align="center" variant="h6">title</Typography>
-            <Typography align="center">
-              Place:
-              {' '}
-              location
-            </Typography>
-            <Typography align="center">
-              Type:
-              {' '}
-              location
-            </Typography>
-            <Typography align="center">
-              {moment().format('MM:HH DD MMM')}
-            </Typography>
-          </CardContent>
-        </Card>
-      </TinderCard>
+      _.map(events, event => {
+        const { title, location, eventDate, eventType, id, createdBy, participants } = event;
+        return (
+          <TinderCard
+            key={id}
+            onSwipe={direction => onSwipe(direction, id)}
+            onCardLeftScreen={() => onCardLeftScreen('fooBar')}
+            preventSwipe={['up', 'down']}
+            className={style.tinderCard}
+          >
+            <Card
+              className={style.eventCard}
+              elevation={5}
+            >
+              <CardContent>
+                <Typography align="center" variant="h4">{title}</Typography>
+                <Typography align="center">
+                  Place:
+                  {' '}
+                  {location}
+                </Typography>
+                <Typography align="center">
+                  Type:
+                  {' '}
+                  {eventType}
+                </Typography>
+                <Typography align="center">
+                  {moment(eventDate).format('MM:HH DD MMM')}
+                </Typography>
+
+                <Typography className={style.hostInfo} align="center">
+                  Host:
+                  {' '}
+                  {createdBy.firstName}
+                  {' '}
+                  {createdBy.lastName}
+                </Typography>
+                <Typography align="center">
+                  Going:
+                  {' '}
+                  {participants.length}
+                  {' '}
+                  people
+                </Typography>
+              </CardContent>
+            </Card>
+          </TinderCard>
+        );
+      })
     );
-  }, [allEvents, isLoading]);
+  }, [events, isLoading]);
 
   return (
     <Layout>
@@ -118,6 +110,19 @@ const SwipeCards = () => {
         <Box className={style.swipeCardWrapper}>
           {renderTinderCards()}
         </Box>
+
+        {lastDirection
+        && (
+          <Fade in timeout={{ enter: 500 }}>
+            <Box className={style.goingInfo}>
+              <Typography variant="h5" align="center">
+                You are
+                {' '}
+                {lastDirection === 'right' ? 'Going!' : 'not going'}
+              </Typography>
+            </Box>
+          </Fade>
+        )}
 
         <Fade in timeout={{ enter: 500 }}>
           <Box className={style.infoWrapper}>

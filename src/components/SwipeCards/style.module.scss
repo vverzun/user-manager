@@ -10,6 +10,14 @@
     padding: 10px 25px 25px;
     height: 400px;
     
+    .tinderCard {
+      position: absolute;
+
+      .hostInfo {
+        margin-top: 15px;
+      }
+    }
+
     .eventCard {
       display: flex;
       align-items: center;
@@ -24,12 +32,19 @@
     }
   }
 
+  .goingInfo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+
   .skeletonCard {
     border-radius: 5px;
     margin-bottom: 25px;
   }
 
   .infoWrapper {
-    margin-top: 50px;
+    margin-top: 80px;
   }
 }
