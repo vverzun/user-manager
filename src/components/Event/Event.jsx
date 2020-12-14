@@ -18,13 +18,17 @@ const Event = () => {
   const { id } = useParams();
   const userId = localStorage.getItem('userId');
 
+  const event = useSelector(state => state.event);
+
   const {
     title,
     description,
     location,
     date,
-    participants
-  } = useSelector(state => state.event);
+    participants,
+    eventType,
+    duration
+  } = event;
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -60,6 +64,17 @@ const Event = () => {
           <Typography variant="h3" className={style.eventTitle}>
             {title}
           </Typography>
+          <Typography align="center">
+            Type:
+            {' '}
+            {eventType}
+          </Typography>
+
+          <Typography align="center">
+            Duration:
+            {' '}
+            {duration}
+          </Typography>
 
           <Box className={style.dateAndTimeWrapper}>
             <Typography>
@@ -67,6 +82,7 @@ const Event = () => {
               {' '}
               {moment(date).format('MM:HH DD MMM')}
             </Typography>
+
             <Typography>
               Location:
               {' '}
