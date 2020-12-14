@@ -7,6 +7,7 @@ import style from './styles.modules.scss';
 import { closeModalAction } from '../../store/actions';
 import { MODAL_TYPES } from '../../constants/modal';
 import DeleteEventModalContent from './DeleteEvent';
+import CancelParticipation from './CancelParticipationModal';
 
 const Modal = () => {
   const isModalOpened = useSelector(state => state.isModalOpened);
@@ -25,10 +26,14 @@ const Modal = () => {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
-
       {modalContentType === MODAL_TYPES.DELETE_EVENT
       && (
         <DeleteEventModalContent data={modalData} />
+      )}
+
+      {modalContentType === MODAL_TYPES.CANCEL_PARTICIPATION
+      && (
+        <CancelParticipation data={modalData} />
       )}
 
       {modalContentType === MODAL_TYPES.CREATE_EVENT

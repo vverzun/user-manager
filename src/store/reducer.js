@@ -64,6 +64,7 @@ export default (state, { type, payload }) => {
 
     case actionTypes.LOGIN_USER:
       localStorage.setItem('jwtToken', payload.jwtToken.jwtToken);
+      localStorage.setItem('userId', payload.jwtToken.userId);
 
       return {
         ...state
@@ -71,6 +72,7 @@ export default (state, { type, payload }) => {
 
     case actionTypes.LOGOUT:
       localStorage.removeItem('jwtToken');
+      localStorage.removeItem('userId');
 
       return {
         ...state

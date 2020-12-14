@@ -24,6 +24,7 @@ const userService = {
       type: 'POST',
       request: user
     });
+
     return response.json();
   }
 };
