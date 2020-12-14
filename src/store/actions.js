@@ -153,6 +153,20 @@ export const addEventToGoing = eventId => async dispatch => {
   asyncAction(dispatch, eventService.addEventToGoing, [eventId], addEventToGoingAction);
 };
 
+export const joinEvent = eventId => async dispatch => {
+  asyncAction(dispatch, eventService.addEventToGoing, [eventId], addEventToGoingAction)
+    .then(() => {
+      dispatch(loadEvent(eventId));
+    });
+};
+
 export const removeEventFromGoing = eventId => async dispatch => {
   asyncAction(dispatch, eventService.removeEventFromGoing, [eventId], removeEventFromGoingAction);
+};
+
+export const unJoinEvent = eventId => async dispatch => {
+  asyncAction(dispatch, eventService.removeEventFromGoing, [eventId], removeEventFromGoingAction)
+    .then(() => {
+      dispatch(loadEvent(eventId));
+    });
 };

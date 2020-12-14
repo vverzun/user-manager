@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
+import _ from 'lodash';
 import { v4 as uuidv4 } from 'uuid';
 import { Avatar, Box, Button, Card, Typography, Fade } from '@material-ui/core';
 
@@ -10,10 +11,12 @@ import party from '../../assets/images/party.jpeg';
 import style from './style.module.scss';
 import Layout from '../../containers/Layout/Layout';
 import BackButton from '../common/BackButton/BackButton';
-import { loadEvent } from '../../store/actions';
+import { loadEvent, joinEvent, openModalAction } from '../../store/actions';
+import { MODAL_TYPES } from '../../constants/modal';
 
 const Event = () => {
   const { id } = useParams();
+  const userId = localStorage.getItem('userId');
 
   const {
     title,
@@ -28,6 +31,21 @@ const Event = () => {
   useEffect(() => {
     dispatch(loadEvent(id));
   }, []);
+
+  const handleModalOpen = useCallback(() => {
+    dispatch(openModalAction({
+      modalContentType: MODAL_TYPES.CANCEL_PARTICIPATION,
+      data: { eventId: id }
+    }));
+  }, []);
+
+  const handleGoing = () => {
+    dispatch(joinEvent(id));
+  };
+
+  const isAlreadyGoing = useMemo(() => (
+    _.findIndex(participants, ({ id }) => id === userId) !== -1
+  ), [participants, handleModalOpen, handleGoing]);
 
   return (
     <Layout>
@@ -65,16 +83,26 @@ const Event = () => {
                 Participants
               </Typography>
               <Box className={style.participants}>
-                {participants.map(participant => (
+                {_.map(participants, participant => (
                   <Avatar key={uuidv4()} src={avatar} alt={participant.firstName} />
                 ))}
               </Box>
             </Box>
           </Box>
 
-          <Box className={style.actions}>
-            <Button variant="contained">Join</Button>
-          </Box>
+          {
+            isAlreadyGoing
+              ? (
+                <Box className={style.actions} onClick={handleModalOpen}>
+                  <Button variant="contained">Not going anymore</Button>
+                </Box>
+              )
+              : (
+                <Box className={style.actions} onClick={handleGoing}>
+                  <Button variant="contained">Join</Button>
+                </Box>
+              )
+          }
         </Card>
       </Fade>
     </Layout>
