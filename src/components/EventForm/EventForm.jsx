@@ -14,10 +14,11 @@ import style from './style.module.scss';
 
 const PARTY_TYPES = ['DRINKING', 'SPORTS', 'MOVIES', 'ACTION', 'READING', 'BIBLE_STUDY', 'OTHER'];
 
-const EventForm = ({ title }) => {
+const EventForm = ({ title, data }) => {
   const dispatch = useDispatch();
+  data.partyType = data.eventType;
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(data || {
     title: '',
     partyType: 'OTHER',
     eventDate: '2017-05-24T10:30',

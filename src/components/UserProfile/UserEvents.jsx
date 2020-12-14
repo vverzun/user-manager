@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Skeleton from '@material-ui/lab/Skeleton';
 import DeleteIcon from '@material-ui/icons/Close';
+import EditIcon from '@material-ui/icons/Edit';
 
 import { loadUserCreatedEvents, openModalAction } from '../../store/actions';
 import BackButton from '../common/BackButton/BackButton';
@@ -27,16 +28,23 @@ const UserEvents = () => {
     history.push(`/event/${id}`);
   }, []);
 
-  const dispatch = useDispatch();
-  const handleModalOpen = useCallback(eventId => {
-    dispatch(openModalAction({
-      modalContentType: MODAL_TYPES.DELETE_EVENT,
-      data: { eventId }
-    }));
-  }, []);
-
   const userCreatedEvents = useSelector(state => state.userCreatedEvents);
   const isLoading = useSelector(state => state.isLoading);
+
+  const dispatch = useDispatch();
+  const handleModalOpen = useCallback((eventId, action) => {
+    if (action === 'delete') {
+      dispatch(openModalAction({
+        modalContentType: MODAL_TYPES.DELETE_EVENT,
+        data: { eventId }
+      }));
+    } else {
+      dispatch(openModalAction({
+        modalContentType: MODAL_TYPES.EDIT_EVENT,
+        data: { eventId, eventData: userCreatedEvents.find(event => event.id === eventId) }
+      }));
+    }
+  }, [userCreatedEvents]);
 
   useEffect(() => {
     dispatch(loadUserCreatedEvents());
@@ -80,7 +88,8 @@ const UserEvents = () => {
             </Typography>
             <Typography>{moment(date).format('MM:HH DD MMM')}</Typography>
 
-            <DeleteIcon className={style.deleteIcon} onClick={() => handleModalOpen(id)} />
+            <DeleteIcon className={style.deleteIcon} onClick={() => handleModalOpen(id, 'delete')} />
+            <EditIcon className={style.editIcon} onClick={() => handleModalOpen(id, 'update')} />
           </CardContent>
         </Card>
       </Grow>

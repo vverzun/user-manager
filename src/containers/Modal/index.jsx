@@ -26,6 +26,14 @@ const Modal = () => {
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
     >
+      {modalContentType === MODAL_TYPES.EDIT_EVENT
+      && (
+        <EventForm
+          title="Edit Your Event"
+          data={modalData.eventData}
+        />
+      )}
+
       {modalContentType === MODAL_TYPES.DELETE_EVENT
       && (
         <DeleteEventModalContent data={modalData} />
