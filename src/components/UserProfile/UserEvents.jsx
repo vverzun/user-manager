@@ -71,7 +71,7 @@ const UserEvents = () => {
       return <Typography align="center">There are no events right now</Typography>;
     }
 
-    return _.map(userCreatedEvents, ({ title, date, location, id }, index) => (
+    return _.map(userCreatedEvents, ({ title, eventDate, location, id }, index) => (
       <Grow in timeout={TRANSITION_TIME * index + TRANSITION_TIME} key={id}>
         <Card
           key={id}
@@ -86,7 +86,7 @@ const UserEvents = () => {
               {' '}
               {location}
             </Typography>
-            <Typography>{moment(date).format('MM:HH DD MMM')}</Typography>
+            <Typography>{moment(eventDate).format('MM:HH DD MMM')}</Typography>
 
             <DeleteIcon className={style.deleteIcon} onClick={() => handleModalOpen(id, 'delete')} />
             <EditIcon className={style.editIcon} onClick={() => handleModalOpen(id, 'update')} />

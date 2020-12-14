@@ -2,7 +2,7 @@ const getFetchUrl = args => {
   const certificate = 'https://cors-anywhere.herokuapp.com/';
   const baseURL = process.env.NODE_ENV === 'development'
     // ? 'http://192.168.0.126:8080'
-    ? 'https://partynder.herokuapp.com'
+    ? 'https://partynder1.herokuapp.com'
     : `${certificate}http://192.168.0.126:8080`;
 
   return `${baseURL}${args.endpoint}`;

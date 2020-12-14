@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
@@ -17,15 +18,12 @@ const PARTY_TYPES = ['DRINKING', 'SPORTS', 'MOVIES', 'ACTION', 'READING', 'BIBLE
 
 const EventForm = ({ title, data }) => {
   const dispatch = useDispatch();
-  if (data) {
-    data.partyType = data.eventType;
-  }
 
   const [formData, setFormData] = useState(data || {
     title: '',
-    partyType: 'OTHER',
-    eventDate: '2017-05-24T10:30',
-    creationDate: new Date(),
+    eventType: 'OTHER',
+    eventDate: new Date(),
+    creationDate: null,
     location: '',
     description: '',
     duration: '',
@@ -45,7 +43,13 @@ const EventForm = ({ title, data }) => {
   }, []);
 
   const handleEventCreate = () => {
-    dispatch(loadUpdateEvent(formData));
+    const mappedFormData = {
+      ...formData,
+      creationDate: moment().valueOf(),
+      eventDate: moment(formData.eventDate).valueOf()
+    };
+
+    dispatch(loadUpdateEvent(mappedFormData));
   };
 
   const menuOptions = useMemo(() => (
@@ -76,8 +80,8 @@ const EventForm = ({ title, data }) => {
           onChange={handleInputChange}
           variant="outlined"
           fullWidth
-          name="partyType"
-          value={formData.partyType}
+          name="eventType"
+          value={formData.eventType}
         >
           {menuOptions}
         </Select>

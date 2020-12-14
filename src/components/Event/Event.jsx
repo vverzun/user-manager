@@ -24,7 +24,7 @@ const Event = () => {
     title,
     description,
     location,
-    date,
+    eventDate,
     participants,
     eventType,
     duration
@@ -80,7 +80,7 @@ const Event = () => {
             <Typography>
               Date:
               {' '}
-              {moment(date).format('MM:HH DD MMM')}
+              {moment(eventDate).format('MM:HH DD MMM')}
             </Typography>
 
             <Typography>
