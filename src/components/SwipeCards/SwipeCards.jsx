@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState, useMemo } from 'react';
 import _ from 'lodash';
 import moment from 'moment';
-import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   Typography,
@@ -10,39 +9,15 @@ import {
   Box,
   Fade
 } from '@material-ui/core';
-import Skeleton from '@material-ui/lab/Skeleton';
 import TinderCard from 'react-tinder-card';
 
 import Layout from '../../containers/Layout/Layout';
-import { loadAllEvents } from '../../store/actions';
+import { loadAllEvents, addEventToGoing, removeEventFromGoing } from '../../store/actions';
 import style from './style.module.scss';
 import BackButton from '../common/BackButton/BackButton';
 
-const db = [
-  {
-    name: 'Richard Hendricks',
-    url: './img/richard.jpg'
-  },
-  {
-    name: 'Erlich Bachman',
-    url: './img/erlich.jpg'
-  },
-  {
-    name: 'Monica Hall',
-    url: './img/monica.jpg'
-  },
-  {
-    name: 'Jared Dunn',
-    url: './img/jared.jpg'
-  },
-  {
-    name: 'Dinesh Chugtai',
-    url: './img/dinesh.jpg'
-  }
-];
-
 const SwipeCards = () => {
-  const [characters, setCharacters] = useState(db);
+  const [characters, setCharacters] = useState();
   const [lastDirection, setLastDirection] = useState();
 
   const dispatch = useDispatch();
@@ -55,8 +30,12 @@ const SwipeCards = () => {
     dispatch(loadAllEvents());
   }, []);
 
-  const onSwipe = direction => {
-    console.log(`You swiped: ${direction}`);
+  const onSwipe = (direction, id) => {
+    if (direction === 'right') {
+      dispatch(addEventToGoing(id));
+    } else if (direction === 'left') {
+      dispatch(removeEventFromGoing(id));
+    }
 
     setLastDirection(direction);
   };
@@ -66,30 +45,17 @@ const SwipeCards = () => {
   };
 
   const renderTinderCards = useCallback(() => {
-    if (isLoading) {
-      return (
-        <Skeleton
-          className={style.skeletonCard}
-          variant="rect"
-          width={300}
-          height={300}
-        />
-      );
-    }
-
     if (_.isEmpty(events)) {
       return <Typography>There are no events right now</Typography>;
     }
 
     return (
       _.map(events, event => {
-        console.log('event', event);
         const { title, location, eventDate, eventType, id, createdBy, participants } = event;
         return (
-
           <TinderCard
             key={id}
-            onSwipe={onSwipe}
+            onSwipe={direction => onSwipe(direction, id)}
             onCardLeftScreen={() => onCardLeftScreen('fooBar')}
             preventSwipe={['up', 'down']}
             className={style.tinderCard}

@@ -55,6 +55,22 @@ const eventService = {
     }, true);
 
     return response.json();
+  },
+
+  addEventToGoing: async id => {
+    await callWebApi({
+      endpoint: '/addEventToGoing',
+      type: 'POST',
+      request: { id }
+    }, true);
+  },
+
+  removeEventFromGoing: async id => {
+    await callWebApi({
+      endpoint: '/removeEventFromGoing',
+      type: 'POST',
+      request: { id }
+    }, true);
   }
 };
 

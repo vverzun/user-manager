@@ -91,6 +91,14 @@ export const logout = () => ({
   type: actionTypes.LOGOUT
 });
 
+const addEventToGoingAction = () => ({
+  type: actionTypes.ADD_EVENT_TO_GOING
+});
+
+const removeEventFromGoingAction = () => ({
+  type: actionTypes.REMOVE_EVENT_FROM_GOING
+});
+
 export const loadAllEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getAllEvents, [], getAllEventsAction);
 };
@@ -140,4 +148,12 @@ export const loadCreateEvent = event => async dispatch => {
   asyncAction(dispatch, eventService.postEvent, [event], postEventAction);
 
   dispatch(closeModalAction());
+};
+
+export const addEventToGoing = eventId => async dispatch => {
+  asyncAction(dispatch, eventService.addEventToGoing, [eventId], addEventToGoingAction);
+};
+
+export const removeEventFromGoing = eventId => async dispatch => {
+  asyncAction(dispatch, eventService.removeEventFromGoing, [eventId], removeEventFromGoingAction);
 };
