@@ -9,7 +9,8 @@ import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import MenuItem from '@material-ui/core/MenuItem';
-import { loadCreateEvent, closeModalAction } from '../../store/actions';
+
+import { loadUpdateEvent, closeModalAction } from '../../store/actions';
 import style from './style.module.scss';
 
 const PARTY_TYPES = ['DRINKING', 'SPORTS', 'MOVIES', 'ACTION', 'READING', 'BIBLE_STUDY', 'OTHER'];
@@ -42,7 +43,7 @@ const EventForm = ({ title, data }) => {
   }, []);
 
   const handleEventCreate = () => {
-    dispatch(loadCreateEvent(formData));
+    dispatch(loadUpdateEvent(formData));
   };
 
   const menuOptions = useMemo(() => (

@@ -58,6 +58,13 @@ const postEventAction = event => ({
   }
 });
 
+const updateEventAction = event => ({
+  type: actionTypes.UPDATE_EVENT,
+  payload: {
+    event
+  }
+});
+
 const getUserCreatedEventsAction = data => ({
   type: actionTypes.GET_USER_CREATED_EVENTS,
   payload: {
@@ -164,6 +171,16 @@ export const loadCreateEvent = event => async dispatch => {
   asyncAction(dispatch, eventService.postEvent, [event], postEventAction);
 
   dispatch(closeModalAction());
+};
+
+export const loadUpdateEvent = event => async dispatch => {
+  asyncAction(dispatch, eventService.postEvent, [event], updateEventAction)
+    .then(() => {
+      dispatch(loadUserCreatedEvents())
+        .then(() => {
+          dispatch(closeModalAction());
+        });
+    });
 };
 
 export const addEventToGoing = eventId => async dispatch => {
