@@ -10,6 +10,15 @@ const eventService = {
     return response.json();
   },
 
+  getAllParticipants: async id => {
+    const response = await callWebApi({
+      endpoint: `/participants/${id}`,
+      type: 'GET'
+    }, true);
+
+    return response.json();
+  },
+
   getAllEventsFiltered: async filters => {
     const response = await callWebApi({
       endpoint: '/events/search/findFilteredEvents',

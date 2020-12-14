@@ -27,7 +27,7 @@ const Event = () => {
   const history = useHistory();
 
   const handleRedirectToParticipants = () => {
-    history.push('/participants');
+    history.push(`/participants/${id}`);
   };
 
   useEffect(() => {
