@@ -49,26 +49,34 @@ const Layout = ({ children }) => {
     <Box>
       <AppBar position="static">
         <Toolbar className={style.toolbar}>
-          <Box className={style.menu}>
-            <Button
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={handleClick}
-            >
-              <MenuIcon className={style.icon} />
-            </Button>
 
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={redirect('/')}>Home</MenuItem>
-              <MenuItem onClick={redirect('/profile')}>Profile</MenuItem>
-              <MenuItem onClick={redirect('/events')}>Events</MenuItem>
-            </Menu>
+          <Box className={style.menu}>
+            {isLoggedIn
+            && (
+              <>
+                <Button
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                >
+                  <MenuIcon className={style.icon} />
+                </Button>
+
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={redirect('/')}>Home</MenuItem>
+                  <MenuItem onClick={redirect('/profile')}>Profile</MenuItem>
+                  <MenuItem onClick={redirect('/events')}>Events</MenuItem>
+                  <MenuItem onClick={redirect('/userEvents')}>Created Events</MenuItem>
+                  <MenuItem onClick={redirect('/userGoingEvents')}>Scheduled Events</MenuItem>
+                </Menu>
+              </>
+            )}
 
             <Typography variant="h6">
               Partynder
