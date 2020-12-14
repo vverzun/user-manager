@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { v4 as uuidv4 } from 'uuid';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -9,8 +9,8 @@ import TextField from '@material-ui/core/TextField';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import MenuItem from '@material-ui/core/MenuItem';
-
 import { loadCreateEvent, closeModalAction } from '../../store/actions';
+import style from './style.module.scss';
 
 const PARTY_TYPES = ['DRINKING', 'SPORTS', 'MOVIES', 'ACTION', 'READING', 'BIBLE_STUDY', 'OTHER'];
 
@@ -54,9 +54,13 @@ const EventForm = ({ title }) => {
 
   return (
     <>
-      <DialogTitle name="form-dialog-title">{ title }</DialogTitle>
+      <DialogTitle name="form-dialog-title" className={style.title}>
+        { title }
+      </DialogTitle>
       <DialogContent>
         <TextField
+          className={style.input}
+          variant="outlined"
           name="title"
           label="Title"
           fullWidth
@@ -64,7 +68,9 @@ const EventForm = ({ title }) => {
           value={formData.title}
         />
         <Select
+          className={style.input}
           onChange={handleInputChange}
+          variant="outlined"
           fullWidth
           name="partyType"
           value={formData.partyType}
@@ -72,6 +78,8 @@ const EventForm = ({ title }) => {
           {menuOptions}
         </Select>
         <TextField
+          className={style.input}
+          variant="outlined"
           name="location"
           label="Location"
           fullWidth
@@ -79,6 +87,8 @@ const EventForm = ({ title }) => {
           value={formData.location}
         />
         <TextField
+          className={style.input}
+          variant="outlined"
           type="number"
           name="duration"
           label="Duration"
@@ -87,6 +97,8 @@ const EventForm = ({ title }) => {
           value={formData.duration}
         />
         <TextField
+          className={style.input}
+          variant="outlined"
           type="number"
           name="radius"
           label="Radius"
@@ -95,8 +107,11 @@ const EventForm = ({ title }) => {
           value={formData.radius}
         />
         <TextField
+          className={style.input}
+          variant="outlined"
           name="eventDate"
-          label="Time"
+          fullWidth
+          label="Date and time"
           type="datetime-local"
           InputLabelProps={{
             shrink: true
@@ -105,6 +120,8 @@ const EventForm = ({ title }) => {
           value={formData.eventDate}
         />
         <TextField
+          className={style.input}
+          variant="outlined"
           multiline
           rowsMax={4}
           name="description"

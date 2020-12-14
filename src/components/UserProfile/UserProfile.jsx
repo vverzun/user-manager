@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 import { openModalAction, loadUser } from '../../store/actions';
-import user from '../../assets/images/user.png';
+import ProfilePhoto from '../../assets/images/profile-photo.png';
 import style from './style.module.scss';
 import Layout from '../../containers/Layout/Layout';
 import BackButton from '../common/BackButton/BackButton';
@@ -42,29 +42,26 @@ const UserProfile = () => {
       <Box className={style.container}>
         <Box className={style.header}>
           <picture>
-            <img src={user} alt="user icon" />
+            <img src={ProfilePhoto} alt="user" />
           </picture>
-          <Typography>
-            {firstName}
-            {' '}
-            {lastName}
-          </Typography>
+          <Box className={style.personalInfo}>
+            <Typography>
+              {firstName}
+              {' '}
+              {lastName}
+            </Typography>
+            <Typography className={style.smallText}>
+              Events visited:
+              {' '}
+              {eventsVisited}
+            </Typography>
+            <Typography className={style.smallText}>
+              Events created:
+              {' '}
+              {eventsCreated}
+            </Typography>
+          </Box>
         </Box>
-        <Divider />
-
-        <Box className={style.infoWrapper}>
-          <Typography>
-            Events visited:
-            {' '}
-            {eventsVisited}
-          </Typography>
-          <Typography>
-            Events created:
-            {' '}
-            {eventsCreated}
-          </Typography>
-        </Box>
-        <Divider />
 
         <Box className={style.myEventsWrapper} onClick={redirect('/userEvents')}>
           <Typography variant="h6">

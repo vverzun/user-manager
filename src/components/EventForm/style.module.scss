@@ -1,0 +1,9 @@
+.title {
+  text-align: center;
+}
+
+.input {
+  &:not(:last-of-type) {
+    margin-bottom: 15px;
+  }
+}
