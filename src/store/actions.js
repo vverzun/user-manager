@@ -61,7 +61,7 @@ const postEventAction = event => ({
 const getUserCreatedEventsAction = data => ({
   type: actionTypes.GET_USER_CREATED_EVENTS,
   payload: {
-    userCreatedEvents: data._embedded.events
+    userCreatedEvents: data
   }
 });
 
