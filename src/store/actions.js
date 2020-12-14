@@ -3,7 +3,6 @@ import actionTypes from './actionTypes';
 import asyncAction from '../helpers/asyncActionHelper';
 import eventService from '../services/eventService';
 import userService from '../services/userService';
-import store from '../configureStore';
 
 export const openModalAction = ({ modalContentType, data }) => ({
   type: actionTypes.OPEN_MODAL,
@@ -99,6 +98,13 @@ const removeEventFromGoingAction = () => ({
   type: actionTypes.REMOVE_EVENT_FROM_GOING
 });
 
+const getAllParticipantsAction = participants => ({
+  type: actionTypes.GET_ALL_PARTICIPANTS,
+  payload: {
+    participants
+  }
+});
+
 export const loadAllEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getAllEvents, [], getAllEventsAction);
 };
@@ -169,4 +175,8 @@ export const unJoinEvent = eventId => async dispatch => {
     .then(() => {
       dispatch(loadEvent(eventId));
     });
+};
+
+export const loadParticipants = id => async dispatch => {
+  asyncAction(dispatch, eventService.getAllParticipants, [id], getAllParticipantsAction);
 };

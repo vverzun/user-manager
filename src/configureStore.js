@@ -17,6 +17,8 @@ const initialState = {
     participants: []
   },
 
+  participants: [],
+
   user: {
     firstName: '',
     lastName: '',

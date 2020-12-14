@@ -110,6 +110,13 @@ export default (state, { type, payload }) => {
         isLoading: false
       };
 
+    case actionTypes.GET_ALL_PARTICIPANTS:
+      return {
+        ...state,
+        participants: payload.participants,
+        isLoading: false
+      };
+
     default: return state;
   }
 };

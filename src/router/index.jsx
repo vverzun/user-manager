@@ -14,6 +14,7 @@ import UserProfile from '../components/UserProfile/UserProfile';
 import UserEvents from '../components/UserProfile/UserEvents';
 import SignUp from '../components/Auth/SignUp';
 import SwipeCards from '../components/SwipeCards/SwipeCards';
+import Participants from '../components/Participants/Participants';
 
 const Router = () => (
   <BrowserRouter>
@@ -24,6 +25,7 @@ const Router = () => (
       <ProtectedRoute exact path="/event/:id" component={Event} />
       <ProtectedRoute exact path="/userEvents" component={UserEvents} />
       <ProtectedRoute exact path="/swipeCards" component={SwipeCards} />
+      <ProtectedRoute exact path="/participants/:id" component={Participants} />
 
       <Route exact path="/login" component={Login} />
       <Route exact path="/sign-up" component={SignUp} />
