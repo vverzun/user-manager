@@ -57,7 +57,7 @@ const UserGoingEvents = () => {
       return <Typography align="center">You are not going to any events yet</Typography>;
     }
 
-    return _.map(userGoingEvents, ({ title, date, location, id }, index) => (
+    return _.map(userGoingEvents, ({ title, eventDate, location, id }, index) => (
       <Grow in timeout={TRANSITION_TIME * index + TRANSITION_TIME} key={uuidv4()}>
         <Card
           className={style.eventCard}
@@ -71,7 +71,7 @@ const UserGoingEvents = () => {
               {' '}
               {location}
             </Typography>
-            <Typography>{moment(date).format('MM:HH DD MMM')}</Typography>
+            <Typography>{moment(eventDate).format('MM:HH DD MMM')}</Typography>
           </CardContent>
         </Card>
       </Grow>

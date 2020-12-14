@@ -87,7 +87,7 @@ const EventList = () => {
       return <Typography align="center">There are no events right now</Typography>;
     }
 
-    return _.map(allEvents, ({ title, date, location, id }, index) => (
+    return _.map(allEvents, ({ title, eventDate, location, id }, index) => (
       <Grow in timeout={TRANSITION_TIME * index + TRANSITION_TIME} key={id}>
         <Card
           key={id}
@@ -102,7 +102,7 @@ const EventList = () => {
               {' '}
               {location}
             </Typography>
-            <Typography>{moment(date).format('MM:HH DD MMM')}</Typography>
+            <Typography>{moment(eventDate).format('MM:HH DD MMM')}</Typography>
           </CardContent>
         </Card>
       </Grow>
