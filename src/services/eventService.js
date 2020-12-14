@@ -56,6 +56,15 @@ const eventService = {
     return response.json();
   },
 
+  getUserGoingEvents: async () => {
+    const response = await callWebApi({
+      endpoint: '/userEvents',
+      type: 'GET'
+    }, true);
+
+    return response.json();
+  },
+
   postEvent: async event => {
     const response = await callWebApi({
       endpoint: '/events',

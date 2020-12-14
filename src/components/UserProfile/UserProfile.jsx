@@ -65,7 +65,14 @@ const UserProfile = () => {
 
         <Box className={style.myEventsWrapper} onClick={redirect('/userEvents')}>
           <Typography variant="h6">
-            My events
+            My created events
+          </Typography>
+          <ArrowForwardIcon className={style.myEventsIcon} />
+        </Box>
+
+        <Box className={style.myEventsWrapper} onClick={redirect('/userGoingEvents')}>
+          <Typography variant="h6">
+            My scheduled events
           </Typography>
           <ArrowForwardIcon className={style.myEventsIcon} />
         </Box>
