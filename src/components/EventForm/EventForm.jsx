@@ -18,13 +18,10 @@ const PARTY_TYPES = ['DRINKING', 'SPORTS', 'MOVIES', 'ACTION', 'READING', 'BIBLE
 
 const EventForm = ({ title, data }) => {
   const dispatch = useDispatch();
-  if (data) {
-    data.partyType = data.eventType;
-  }
 
   const [formData, setFormData] = useState(data || {
     title: '',
-    partyType: 'OTHER',
+    eventType: 'OTHER',
     eventDate: new Date(),
     creationDate: null,
     location: '',
@@ -83,8 +80,8 @@ const EventForm = ({ title, data }) => {
           onChange={handleInputChange}
           variant="outlined"
           fullWidth
-          name="partyType"
-          value={formData.partyType}
+          name="eventType"
+          value={formData.eventType}
         >
           {menuOptions}
         </Select>
