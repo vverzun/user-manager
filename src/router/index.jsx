@@ -12,6 +12,7 @@ import EventList from '../components/EventList/EventList';
 import Event from '../components/Event/Event';
 import UserProfile from '../components/UserProfile/UserProfile';
 import UserEvents from '../components/UserProfile/UserEvents';
+import UserGoingEvents from '../components/UserProfile/UserGoingEvents';
 import SignUp from '../components/Auth/SignUp';
 import SwipeCards from '../components/SwipeCards/SwipeCards';
 import Participants from '../components/Participants/Participants';
@@ -24,6 +25,7 @@ const Router = () => (
       <ProtectedRoute exact path="/profile" component={UserProfile} />
       <ProtectedRoute exact path="/event/:id" component={Event} />
       <ProtectedRoute exact path="/userEvents" component={UserEvents} />
+      <ProtectedRoute exact path="/userGoingEvents" component={UserGoingEvents} />
       <ProtectedRoute exact path="/swipeCards" component={SwipeCards} />
       <ProtectedRoute exact path="/participants/:id" component={Participants} />
 

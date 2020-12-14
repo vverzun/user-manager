@@ -65,6 +65,13 @@ const getUserCreatedEventsAction = data => ({
   }
 });
 
+const getUserGoingEventsAction = data => ({
+  type: actionTypes.GET_USER_GOING_EVENTS,
+  payload: {
+    userGoingEvents: data
+  }
+});
+
 const getUserAction = user => ({
   type: actionTypes.GET_USER,
   payload: {
@@ -137,6 +144,10 @@ export const loadLoginUser = (user, history) => async dispatch => {
 
 export const loadUserCreatedEvents = () => async dispatch => {
   asyncAction(dispatch, eventService.getUserCreatedEvents, [], getUserCreatedEventsAction);
+};
+
+export const loadUserGoingEvents = () => async dispatch => {
+  asyncAction(dispatch, eventService.getUserGoingEvents, [], getUserGoingEventsAction);
 };
 
 export const deleteEvent = eventId => async dispatch => {

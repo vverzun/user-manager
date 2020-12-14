@@ -46,7 +46,7 @@ const SwipeCards = () => {
 
   const renderTinderCards = useCallback(() => {
     if (_.isEmpty(events)) {
-      return <Typography>There are no events right now</Typography>;
+      return <Typography align="center">There are no events right now</Typography>;
     }
 
     return (
