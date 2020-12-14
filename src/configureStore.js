@@ -17,6 +17,12 @@ const initialState = {
     participants: []
   },
 
+  participants: [
+    { firstName: 'Lyuda', lastName: 'Galich' },
+    { firstName: 'Lyuda', lastName: 'Galich' },
+    { firstName: 'Lyuda', lastName: 'Galich' }
+  ],
+
   user: {
     firstName: '',
     lastName: '',

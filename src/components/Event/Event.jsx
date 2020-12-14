@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { Avatar, Box, Button, Card, Typography, Fade } from '@material-ui/core';
@@ -24,6 +24,11 @@ const Event = () => {
   } = useSelector(state => state.event);
 
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const handleRedirectToParticipants = () => {
+    history.push('/participants');
+  };
 
   useEffect(() => {
     dispatch(loadEvent(id));
@@ -64,7 +69,7 @@ const Event = () => {
               <Typography className={style.text}>
                 Participants
               </Typography>
-              <Box className={style.participants}>
+              <Box className={style.participants} onClick={handleRedirectToParticipants}>
                 {participants.map(participant => (
                   <Avatar key={uuidv4()} src={avatar} alt={participant.firstName} />
                 ))}

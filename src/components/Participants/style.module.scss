@@ -1,0 +1,22 @@
+.participantsContainer {
+  margin: 25px;
+
+  .card {
+    &:not(:last-of-type) {
+      margin-bottom: 25px;
+    }
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+
+    .avatar {
+      margin-right: 10px;
+    }
+
+    .firstName {
+      margin-right: 10px;
+    }
+  }
+}
